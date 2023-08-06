@@ -1,0 +1,20 @@
+import React from "react";
+import ContactChats from "../components/ContactChats";
+import MessageSection from "../components/MessageSection";
+import NavBar from "../components/NavBar";
+
+const Home = () => {
+  return (
+    <>
+      <div className="md:hidden">
+        <NavBar />
+      </div>
+      <div className="flex overflow-x-scroll">
+        <ContactChats />
+        <MessageSection />
+      </div>
+    </>
+  );
+};
+
+export default Home;
