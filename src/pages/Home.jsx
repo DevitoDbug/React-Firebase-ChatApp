@@ -6,10 +6,10 @@ import NavBar from "../components/NavBar";
 const Home = () => {
   return (
     <div className="w-screen h-full">
-      <div className="md:hidden">
+      <div className="h-[10%] md:hidden">
         <NavBar />
       </div>
-      <div className="h-full flex overflow-x-scroll">
+      <div className="h-[90%] flex overflow-x-hidden">
         <ContactChats />
         <MessageSection />
       </div>

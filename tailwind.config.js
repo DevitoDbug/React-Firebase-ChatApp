@@ -12,6 +12,7 @@ export default {
         C_Green: "#46D362",
         C_TextWhite: "#FDFDFE",
         C_TextBlack: "#52585D",
+        C_Gold: "#F3BA4A"
       },
       animation :{
         
