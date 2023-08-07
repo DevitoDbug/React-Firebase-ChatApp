@@ -7,13 +7,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        C_DPurple: '#5d5b8d',
-        C_Button_LPurple: '#7b96ec',
-        C_LPurple: '#a7bcff',
-        C_white: '#FFF',
-        C_Grape: '#3e3c61',
-        C_DGrape: '#2f2d52',
-        C_LGrape:"#ddddf7",
+        C_LightBlue: "#E3F6FC",
+        C_DarkBlue: "#6588DE",
+        C_Green: "#46D362",
+        C_TextWhite: "#FDFDFE",
+        C_TextBlack: "#52585D",
       },
       animation :{
         

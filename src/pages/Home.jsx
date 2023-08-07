@@ -5,7 +5,7 @@ import NavBar from "../components/NavBar";
 
 const Home = () => {
   return (
-    <>
+    <div className="">
       <div className="md:hidden">
         <NavBar />
       </div>
@@ -13,7 +13,7 @@ const Home = () => {
         <ContactChats />
         <MessageSection />
       </div>
-    </>
+    </div>
   );
 };
 
