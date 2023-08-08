@@ -2,8 +2,10 @@ import { faImage } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, storage } from "../firebase";
+
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const Register = () => {
   const [error, setError] = useState("");
@@ -21,6 +23,24 @@ const Register = () => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       console.log(res);
+
+      const storageRef = ref(storage, fname);
+
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        (error) => {
+          console.log("There  was a failure on the upload\n ERROR: ", error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            await updateProfile(res.user, {
+              displayName: fname + sname,
+              photoURL: downloadURL,
+            });
+          });
+        },
+      );
     } catch (e) {
       setError(e.message);
     }
