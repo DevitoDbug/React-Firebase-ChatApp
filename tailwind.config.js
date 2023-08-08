@@ -11,8 +11,10 @@ export default {
         C_DarkBlue: "#6588DE",
         C_Green: "#46D362",
         C_TextWhite: "#FDFDFE",
+        C_TextWhiteDull: "#F2F6F7",
         C_TextBlack: "#52585D",
-        C_Gold: "#F3BA4A"
+        C_Gold: "#F3BA4A",
+        C_DarkBlueShadow: "rgba(0, 72, 251, 0.30)",
       },
       animation :{
         
