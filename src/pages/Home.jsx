@@ -5,7 +5,7 @@ import MessageSection from "../components/MessageSection";
 const Home = () => {
   return (
     <div className=" w-screen h-full">
-      <div className="h-full flex overflow-x-hidden">
+      <div className="h-full flex overflow-x-scroll">
         <ContactChats />
         <MessageSection />
       </div>

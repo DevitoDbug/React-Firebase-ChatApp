@@ -1,0 +1,47 @@
+.sms {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.5rem;
+  .sms-user-name {
+    color: #52585d;
+    font-weight: 600;
+  }
+  .sms-info {
+    display: flex;
+    flex-direction: row;
+    gap: 0.7rem;
+    .sms-content {
+      color: #52585d;
+      font-weight: 400;
+      background-color: #e3f6fc;
+      padding: 1rem;
+      border-radius: 0px 14px 14px 14px;
+      display: flex;
+      flex-direction: column;
+      span {
+        color: #6588de;
+        text-align: right;
+        align-self: end;
+        font-size: 10px;
+        margin-top: 0.5rem;
+        margin-bottom: -0.9rem;
+      }
+    }
+  }
+
+  &.owner-sms {
+    align-items: flex-end;
+    .sms-info {
+      flex-direction: row-reverse;
+    }
+    .sms-content {
+      border-radius: 14px 0px 14px 14px;
+      background-color: #f3ba4a;
+      color: #fdfdfe;
+      span {
+        color: #fdfdfe;
+      }
+    }
+  }
+}
