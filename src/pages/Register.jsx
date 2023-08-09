@@ -3,9 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, storage } from "../firebase";
+import { auth, db, storage } from "../firebase";
 
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { doc, setDoc } from "firebase/firestore";
 
 const Register = () => {
   const [error, setError] = useState("");
@@ -34,15 +35,31 @@ const Register = () => {
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            //updating user profile
             await updateProfile(res.user, {
-              displayName: fname + sname,
+              displayName: fname,
               photoURL: downloadURL,
             });
+
+            //adding the user to the users collection
+            try {
+              await setDoc(doc(db, "users", res.user.uid), {
+                uid: res.user.uid,
+                firstName: fname,
+                secondName: sname,
+                email,
+                photoURL: downloadURL,
+              });
+            } catch (e) {
+              console.log(e);
+            }
+
+            //
           });
         },
       );
     } catch (e) {
-      setError(e.message);
+      setError(e);
     }
   };
   return (
