@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -9,14 +9,28 @@ import { LoginContext } from "./context/AuthContext";
 const App = () => {
   const currentUser = useContext(LoginContext);
   console.log(currentUser);
+
+  const ProtectedRoute = () => {
+    if (!currentUser) {
+      return <Navigate to="login" />;
+    }
+  };
+
   return (
     <div className=" w-screen h-screen flex justify-center items-center">
       <BrowserRouter>
         <Routes>
           <Route path="/">
-            <Route index element={<Home />} />
-            <Route path="Register" element={<Register />} />
-            <Route path="Login" element={<Login />} />
+            <Route
+              index
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="register" element={<Register />} />
+            <Route path="login" element={<Login />} />
             <Route path="*" element={<Error />} />
           </Route>
         </Routes>

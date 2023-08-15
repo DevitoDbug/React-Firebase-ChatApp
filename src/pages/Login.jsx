@@ -1,10 +1,22 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { auth } from "../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
-  const handleSubmit = (e) => {
+  const [error, setEror] = useState("");
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const email = e.target[0].value;
+    const password = e.target[1].value;
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (e) {
+      console.log(e);
+      setEror(e);
+    }
   };
   return (
     <form
@@ -27,6 +39,9 @@ const Login = () => {
       <button className="text-2xl text-C_TextWhite bg-C_DarkBlue shadow-lg py-2 px-3 rounded-xl md:text-3xl md:mt-3 lg:text-xl lg:mt-3">
         Login
       </button>
+      {error.length > 0 && (
+        <span className="text-sm text-red-600">{error}</span>
+      )}
       <div className="text-sm">
         You don't have an account?
         <Link
