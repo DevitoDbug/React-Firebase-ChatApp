@@ -24,6 +24,7 @@ const NavBar = () => {
     setIsloggedIn(false);
     navigate("/login");
   };
+
   return (
     <div className="px-1 py-1 h-[90%] bg-C_LightBlue flex flex-row items-center justify-between gap-2 rounded-xl m-1">
       <h1 className="text-C_TextBlack text-xl font-bold ml-1">Artlife</h1>
