@@ -7,7 +7,7 @@ import { auth, db, storage } from "../firebase";
 
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [error, setError] = useState("");
@@ -120,7 +120,15 @@ const Register = () => {
       <button className="text-2xl text-C_TextWhite bg-C_DarkBlue shadow-lg py-2 px-3 rounded-xl md:text-3xl md:mt-3 lg:text-xl lg:mt-3">
         Register
       </button>
-      {error && <span className="text-sm text-red-600">{error}</span>}
+      <div className="text-sm">
+        You have an account?
+        <Link className="text-C_DarkBlue  text-sm font-bold ml-1" to={"/login"}>
+          Log in
+        </Link>
+      </div>
+      {error.length > 0 && (
+        <span className="text-sm text-red-600">{error}</span>
+      )}
     </form>
   );
 };
