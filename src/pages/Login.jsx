@@ -1,11 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
   const [error, setEror] = useState("");
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const email = e.target[0].value;
@@ -13,6 +14,7 @@ const Login = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      navigate("/");
     } catch (e) {
       console.log(e);
       setEror(e);
