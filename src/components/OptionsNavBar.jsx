@@ -1,7 +1,7 @@
 import {
+  faMessage,
   faSearch,
   faStar,
-  faUser,
   faUserGroup,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,13 +12,13 @@ const OptionsNavBar = () => {
     <div className="w-full p-2 border-C_BorderLightBlue border-t-2 flex flex-row items-center justify-center gap-1">
       <button>
         <FontAwesomeIcon
-          icon={faUser}
+          icon={faUserGroup}
           className="ml-2 text-C_UserDullBlack text-xl"
         />
       </button>
       <button>
         <FontAwesomeIcon
-          icon={faUserGroup}
+          icon={faMessage}
           className="ml-2 text-C_UserDullBlack text-xl"
         />
       </button>

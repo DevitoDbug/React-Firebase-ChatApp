@@ -5,7 +5,7 @@ import OptionsNavBar from "./OptionsNavBar";
 
 const ContactChats = () => {
   return (
-    <aside className="flex-shrink-0 w-screen h-full md:w-2/6">
+    <aside className="flex-shrink-0 w-screen h-full md:w-2/6 ">
       <div className=" h-[12%] md:show md:h-[10%] lg:h-[12%]">
         <NavBar />
       </div>
