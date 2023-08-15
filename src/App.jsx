@@ -8,7 +8,6 @@ import { LoginContext } from "./context/AuthContext";
 
 const App = () => {
   const currentUser = useContext(LoginContext);
-  console.log(currentUser);
 
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
