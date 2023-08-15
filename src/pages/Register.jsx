@@ -7,9 +7,12 @@ import { auth, db, storage } from "../firebase";
 
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,13 +54,20 @@ const Register = () => {
                 photoURL: downloadURL,
               });
             } catch (e) {
-              console.log(e);
+              console.log("Adding user to user collection error:\n", e);
             }
 
-            //
+            //user chats
+            try {
+              await setDoc(doc(db, "chats", res.user.uid), {});
+            } catch (e) {
+              console.log(e);
+            }
           });
         },
       );
+
+      navigate("/");
     } catch (e) {
       setError(e);
     }
