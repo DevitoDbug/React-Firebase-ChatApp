@@ -1,8 +1,23 @@
-import { /*faToggleOn,*/ faToggleOff } from "@fortawesome/free-solid-svg-icons";
+import {
+  /*faToggleOn,*/ faToggleOff,
+  faToggleOn,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useState } from "react";
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../firebase";
 
 const NavBar = () => {
+  const [isLoggedIn, setIsloggedIn] = useState(true);
+
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    signOut(auth);
+    setIsloggedIn(false);
+    navigate("/login");
+  };
   return (
     <div className="px-1 py-1 h-[90%] bg-C_LightBlue flex flex-row items-center justify-between gap-2 rounded-xl m-1">
       <h1 className="text-C_TextBlack text-xl font-bold">Artlife</h1>
@@ -14,9 +29,15 @@ const NavBar = () => {
         />
         <div className="flex flex-col items-left">
           <h2 className="text-C_TextBlack font-semibold ">David Ochieng</h2>
-          <button className="w-[80%] px-2 py-1 text-sm text-C_TextWhite font-thin bg-C_DarkBlue rounded-3xl flex justify-between items-center md:p-2 ">
+          <button
+            onClick={handleSignOut}
+            className="w-[80%] px-2 py-1 text-sm text-C_TextWhite font-thin bg-C_DarkBlue rounded-3xl flex justify-between items-center md:p-2 "
+          >
             <span className="">log Out</span>
-            <FontAwesomeIcon icon={faToggleOff} className="ml-2 text-C_Gold" />
+            <FontAwesomeIcon
+              icon={isLoggedIn ? faToggleOff : faToggleOn}
+              className="ml-2 text-C_Gold"
+            />
           </button>
         </div>
       </div>
