@@ -1,14 +1,16 @@
-import React from "react";
-import ContactChats from "../components/ContactChats";
-import MessageSection from "../components/MessageSection";
+import React from 'react';
+import ContactChats from '../components/ContactChats';
+import MessageSection from '../components/MessageSection';
+import Search from '../components/Search';
 
 const Home = () => {
   return (
-    <div className=" w-screen h-full">
-      <div className="h-full flex overflow-x-scroll relative">
+    <div className="relative h-full w-screen">
+      <div className="relative flex h-full overflow-x-scroll">
         <ContactChats />
         <MessageSection />
       </div>
+      <Search />
     </div>
   );
 };

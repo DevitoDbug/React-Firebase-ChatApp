@@ -1,16 +1,23 @@
-import { faImage } from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import { faImage } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useState } from 'react';
 
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, db, storage } from "../firebase";
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from 'firebase/auth';
+import { auth, db, storage } from '../firebase';
 
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { doc, setDoc } from "firebase/firestore";
-import { Link, useNavigate } from "react-router-dom";
+import {
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from 'firebase/storage';
+import { doc, setDoc } from 'firebase/firestore';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Register = () => {
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [isTyping, setIsTyping] = useState(false);
 
   const navigate = useNavigate();
@@ -27,7 +34,11 @@ const Register = () => {
     const file = e.target[4].files[0];
 
     try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
+      const res = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
       console.log(res);
 
       const storageRef = ref(storage, fname);
@@ -36,40 +47,48 @@ const Register = () => {
 
       uploadTask.on(
         (error) => {
-          console.log("There  was a failure on the upload\n ERROR: ", error);
+          console.log(
+            'There  was a failure on the upload\n ERROR: ',
+            error,
+          );
         },
         () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            //updating user profile
-            await updateProfile(res.user, {
-              displayName: fname,
-              photoURL: downloadURL,
-            });
-
-            //adding the user to the users collection
-            try {
-              await setDoc(doc(db, "users", res.user.uid), {
-                uid: res.user.uid,
-                firstName: fname,
-                secondName: sname,
-                email,
+          getDownloadURL(uploadTask.snapshot.ref).then(
+            async (downloadURL) => {
+              //updating user profile
+              await updateProfile(res.user, {
+                displayName: fname,
                 photoURL: downloadURL,
               });
-            } catch (e) {
-              console.log("Adding user to user collection error:\n", e);
-            }
 
-            //user chats
-            try {
-              await setDoc(doc(db, "chats", res.user.uid), {});
-            } catch (e) {
-              console.log(e);
-            }
-          });
+              //adding the user to the users collection
+              try {
+                await setDoc(doc(db, 'users', res.user.uid), {
+                  uid: res.user.uid,
+                  firstName: fname,
+                  secondName: sname,
+                  email,
+                  photoURL: downloadURL,
+                });
+              } catch (e) {
+                console.log(
+                  'Adding user to user collection error:\n',
+                  e,
+                );
+              }
+
+              //user chats
+              try {
+                await setDoc(doc(db, 'chats', res.user.uid), {});
+              } catch (e) {
+                console.log(e);
+              }
+            },
+          );
         },
       );
 
-      navigate("/");
+      navigate('/');
     } catch (e) {
       setError(e);
     }
@@ -77,35 +96,35 @@ const Register = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="text-lg w-full h-full bg-C_LightBlue flex  flex-col gap-3 items-center justify-center md:w-[60%] md:h-[50%] md:rounded-xl md:gap-3 md:shadow-xl  lg:w-[30%] lg:h-[70%] "
+      className="flex h-full w-full flex-col items-center  justify-center gap-3 bg-C_LightBlue text-lg md:h-[50%] md:w-[60%] md:gap-3 md:rounded-xl md:shadow-xl  lg:h-[70%] lg:w-[30%] "
     >
-      <h2 className="text-C_TextBlack text-xl md:text-2xl lg:text-lg">
+      <h2 className="text-xl text-C_TextBlack md:text-2xl lg:text-lg">
         Register
       </h2>
       <input
         onChange={() => setIsTyping(true)}
-        className="w-[70%] p-3 rounded-md outline-C_DarkBlue md:w-[80%] md:text-2xl lg:text-lg lg:p-2"
+        className="w-[70%] rounded-md p-3 outline-C_DarkBlue md:w-[80%] md:text-2xl lg:p-2 lg:text-lg"
         type="text"
         placeholder="First Name"
         name="id"
       />
       <input
         onChange={() => setIsTyping(true)}
-        className="w-[70%] p-3 rounded-md outline-C_DarkBlue md:w-[80%] md:text-2xl lg:text-lg lg:p-2"
+        className="w-[70%] rounded-md p-3 outline-C_DarkBlue md:w-[80%] md:text-2xl lg:p-2 lg:text-lg"
         type="text"
         placeholder="Last Name"
         name="id"
       />
       <input
         onChange={() => setIsTyping(true)}
-        className="w-[70%] p-3 rounded-md outline-C_DarkBlue md:w-[80%] md:text-2xl lg:text-lg lg:p-2"
+        className="w-[70%] rounded-md p-3 outline-C_DarkBlue md:w-[80%] md:text-2xl lg:p-2 lg:text-lg"
         type="text"
         placeholder="Email"
         name="id"
       />
       <input
         onChange={() => setIsTyping(true)}
-        className="w-[70%] p-3 rounded-md outline-C_DarkBlue md:w-[80%] md:text-2xl lg:text-lg lg:p-2"
+        className="w-[70%] rounded-md p-3 outline-C_DarkBlue md:w-[80%] md:text-2xl lg:p-2 lg:text-lg"
         type="password"
         placeholder="Password"
         name="id"
@@ -118,27 +137,34 @@ const Register = () => {
         className="hidden"
       />
       <label
-        className="flex flex-row items-center cursor-pointer"
+        className="flex cursor-pointer flex-row items-center"
         htmlFor="file"
       >
         <FontAwesomeIcon
           icon={faImage}
-          className="text-C_DarkBlue text-[150%] p-1"
+          className="p-1 text-[150%] text-C_DarkBlue"
         />
-        <span className="text-[80%] text-C_TextBlack">Add profile pic</span>
+        <span className="text-[80%] text-C_TextBlack">
+          Add profile pic
+        </span>
       </label>
 
-      <button className="text-2xl text-C_TextWhite bg-C_DarkBlue shadow-lg py-2 px-3 rounded-xl md:text-3xl md:mt-3 lg:text-xl lg:mt-3">
+      <button className="rounded-xl bg-C_DarkBlue px-3 py-2 text-2xl text-C_TextWhite shadow-lg md:mt-3 md:text-3xl lg:mt-3 lg:text-xl">
         Register
       </button>
       <div className="text-sm">
         You have an account?
-        <Link className="text-C_DarkBlue  text-sm font-bold ml-1" to={"/login"}>
+        <Link
+          className="ml-1  text-sm font-bold text-C_DarkBlue"
+          to={'/login'}
+        >
           Log in
         </Link>
       </div>
-      {error.length > 0 && (
-        <span className="text-sm text-red-600">{error}</span>
+      {!isTyping && error.length > 0 && (
+        <span className="text-sm text-red-600 ">
+          Something went wrong
+        </span>
       )}
     </form>
   );
