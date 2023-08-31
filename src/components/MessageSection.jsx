@@ -1,10 +1,10 @@
-import React from "react";
-import Message from "./Message";
-import InputArea from "./InputArea";
+import React from 'react';
+import Message from './Message';
+import InputArea from './InputArea';
 
 const MessageSection = () => {
   return (
-    <div className=" p-2 w-screen flex-shrink-0 h-screen md:w-4/6 ">
+    <div className=" h-screen w-screen flex-shrink-0 p-2 md:w-4/6 ">
       <div className="h-[89vh] sm:h-[85vh] md:h-[93vh]  lg:h-[85vh]">
         <Message />
       </div>

@@ -2,32 +2,32 @@ import {
   faMicrophoneAlt,
   faPaperPlane,
   faPaperclip,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
 
 const InputArea = () => {
   return (
     <div>
-      <div className="w-full resize-y h-auto bg-C_WhiteBright p-1 border-2 border-C_GreyBorder flex flex-row gap-2 justify-aroun items-center rounded-lg">
+      <div className="justify-aroun flex h-auto w-full resize-y flex-row items-center gap-2 rounded-lg border-2 border-C_GreyBorder bg-C_WhiteBright p-1">
         <div className="flex items-center justify-center gap-1">
           <FontAwesomeIcon
             icon={faPaperclip}
-            className="ml-2 text-C_UserDullBlack text-xl"
+            className="ml-2 text-xl text-C_UserDullBlack"
           />
           <FontAwesomeIcon
             icon={faMicrophoneAlt}
-            className="ml-2 text-C_UserDullBlack text-xl"
+            className="ml-2 text-xl text-C_UserDullBlack"
           />
         </div>
         <textarea
-          className="w-[70%] outline-none resize-y h-auto justify-end"
+          className="h-auto w-[70%] resize-y justify-end outline-none"
           placeholder="Type new message..."
           type="text"
         />
         <FontAwesomeIcon
           icon={faPaperPlane}
-          className=" text-C_UserDullBlack text-xl justify-end"
+          className=" justify-end text-xl text-C_UserDullBlack"
         />
       </div>
     </div>

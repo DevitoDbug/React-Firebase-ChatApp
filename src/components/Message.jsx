@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Message = () => {
   return (
@@ -8,7 +8,7 @@ const Message = () => {
         <img
           src="../../public/profileImage.png"
           alt="profile"
-          className="w-10 h-10 border-2 rounded-full border-C_Gold "
+          className="h-10 w-10 rounded-full border-2 border-C_Gold "
         />
         <div className="sms-content">
           Hello David
