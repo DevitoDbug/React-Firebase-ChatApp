@@ -12,7 +12,6 @@ import { LoginContext } from '../context/AuthContext';
 const NavBar = () => {
   //currently logged in user
   const { currentUser } = useContext(LoginContext);
-  console.log(currentUser);
   const name = currentUser.displayName;
   const profilePic = currentUser.photoURL;
 

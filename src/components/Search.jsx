@@ -1,14 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faClose } from '@fortawesome/free-solid-svg-icons';
 import { useContext } from 'react';
 import { SearchContext } from '../context/SearchContext';
+import Contact from './Contact';
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  or,
+} from 'firebase/firestore';
+import { db } from '../firebase';
 
 const Search = () => {
   const [, setSearchOpen] = useContext(SearchContext);
+  const [searchedUserName, setSearchedUserName] = useState('');
+
   const handleCloseSearch = () => {
     setSearchOpen(false);
   };
+
+  const handleSearch = async () => {
+    const q = query(
+      collection(db, 'users'),
+      // eslint-disable-next-line no-undef
+      or(
+        where('firstName', '==', searchedUserName),
+        where('lastName', '==', searchedUserName),
+      ),
+    );
+
+    try {
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        console.log(doc.id, ' => ', doc.data());
+      });
+    } catch (e) {
+      console.log('Fetching data from firestore error: ', e);
+    }
+  };
+
   return (
     <div className="absolute left-[10%] top-[10%] flex h-[30%] w-[80%] flex-col items-center rounded-lg bg-[#bae9f8] px-1 py-2 shadow-lg">
       <button
@@ -19,19 +51,25 @@ const Search = () => {
       </button>
       <div className=" flex flex-row items-center justify-between border-b-2 border-gray-300">
         <input
+          onChange={(e) => {
+            setSearchedUserName(e.target.value);
+          }}
           className="w-[95%]  bg-transparent p-3 text-[110%] outline-none"
           type="text"
           placeholder="Search name..."
+          value={searchedUserName}
           name="searchName"
         />
-        <button>
+        <button onClick={handleSearch}>
           <FontAwesomeIcon
             icon={faSearch}
             className="ml-2 self-center text-[130%] font-bold text-C_GreyBorder"
           />
         </button>
       </div>
-      something
+      <div className="w-full px-1 py-4">
+        <Contact />
+      </div>
     </div>
   );
 };
