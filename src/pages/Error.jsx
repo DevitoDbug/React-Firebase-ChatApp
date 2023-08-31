@@ -1,11 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Error = () => {
   return (
-    <div className="text-3xl flex flex-col items-center justify-center">
-      <span>{"Page not found :("}</span>
-      <Link to="/" className="text-C_DarkBlue  text-lg font-bold ml-1">
+    <div className="flex flex-col items-center justify-center text-3xl">
+      <span>{'Page not found :('}</span>
+      <Link
+        to="/"
+        className="ml-1  text-lg font-bold text-C_DarkBlue"
+      >
         Go to home
       </Link>
     </div>

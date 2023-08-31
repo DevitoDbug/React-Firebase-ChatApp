@@ -1,11 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { auth } from '../firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const Login = () => {
-  const [error, setEror] = useState("");
+  const [error, setEror] = useState('');
   const [isTyping, setIsTyping] = useState(false);
 
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const Login = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/");
+      navigate('/');
     } catch (e) {
       setEror(e.message);
       console.log(error);
@@ -26,24 +26,26 @@ const Login = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="text-lg w-full h-full bg-C_LightBlue flex  flex-col gap-3 items-center justify-center md:w-[60%] md:h-[40%] md:rounded-xl md:gap-3 md:shadow-xl lg:w-[30%] lg:h-[60%]"
+      className="flex h-full w-full flex-col items-center  justify-center gap-3 bg-C_LightBlue text-lg md:h-[40%] md:w-[60%] md:gap-3 md:rounded-xl md:shadow-xl lg:h-[60%] lg:w-[30%]"
     >
-      <h2 className="text-C_TextBlack text-xl md:text-2xl lg:text-lg">Login</h2>
+      <h2 className="text-xl text-C_TextBlack md:text-2xl lg:text-lg">
+        Login
+      </h2>
       <input
         onChange={() => setIsTyping(true)}
-        className="w-[70%] p-3 rounded-md outline-C_DarkBlue md:w-[80%] md:text-2xl lg:text-lg lg:p-2"
+        className="w-[70%] rounded-md p-3 outline-C_DarkBlue md:w-[80%] md:text-2xl lg:p-2 lg:text-lg"
         type="text"
         placeholder="Email"
         name="id"
       />
       <input
         onChange={() => setIsTyping(true)}
-        className="w-[70%] p-3 rounded-md outline-C_DarkBlue  md:w-[80%] md:text-2xl lg:text-lg lg:p-2"
+        className="w-[70%] rounded-md p-3 outline-C_DarkBlue  md:w-[80%] md:text-2xl lg:p-2 lg:text-lg"
         type="password"
         placeholder="Password"
         name="id"
       />
-      <button className="text-2xl text-C_TextWhite bg-C_DarkBlue shadow-lg py-2 px-3 rounded-xl md:text-3xl md:mt-3 lg:text-xl lg:mt-3">
+      <button className="rounded-xl bg-C_DarkBlue px-3 py-2 text-2xl text-C_TextWhite shadow-lg md:mt-3 md:text-3xl lg:mt-3 lg:text-xl">
         Login
       </button>
       {!isTyping && error.length > 0 && (
@@ -55,8 +57,8 @@ const Login = () => {
       <div className="text-sm">
         You don't have an account?
         <Link
-          className="text-C_DarkBlue  text-sm font-bold ml-1"
-          to={"/register"}
+          className="ml-1  text-sm font-bold text-C_DarkBlue"
+          to={'/register'}
         >
           Register
         </Link>

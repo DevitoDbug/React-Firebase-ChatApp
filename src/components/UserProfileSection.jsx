@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const UserProfileSection = () => {
   return <div>This is the user profile section</div>;
