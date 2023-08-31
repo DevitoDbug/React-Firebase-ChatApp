@@ -11,11 +11,13 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [error, setError] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsTyping(false);
 
     //data from the form
     const fname = e.target[0].value;
@@ -81,31 +83,40 @@ const Register = () => {
         Register
       </h2>
       <input
+        onChange={() => setIsTyping(true)}
         className="w-[70%] p-3 rounded-md outline-C_DarkBlue md:w-[80%] md:text-2xl lg:text-lg lg:p-2"
         type="text"
         placeholder="First Name"
         name="id"
       />
       <input
+        onChange={() => setIsTyping(true)}
         className="w-[70%] p-3 rounded-md outline-C_DarkBlue md:w-[80%] md:text-2xl lg:text-lg lg:p-2"
         type="text"
         placeholder="Last Name"
         name="id"
       />
       <input
+        onChange={() => setIsTyping(true)}
         className="w-[70%] p-3 rounded-md outline-C_DarkBlue md:w-[80%] md:text-2xl lg:text-lg lg:p-2"
         type="text"
         placeholder="Email"
         name="id"
       />
       <input
+        onChange={() => setIsTyping(true)}
         className="w-[70%] p-3 rounded-md outline-C_DarkBlue md:w-[80%] md:text-2xl lg:text-lg lg:p-2"
         type="password"
         placeholder="Password"
         name="id"
       />
 
-      <input id="file" type="file" className="hidden" />
+      <input
+        onChange={() => setIsTyping(true)}
+        id="file"
+        type="file"
+        className="hidden"
+      />
       <label
         className="flex flex-row items-center cursor-pointer"
         htmlFor="file"
