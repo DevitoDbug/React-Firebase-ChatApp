@@ -1,13 +1,21 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Register from "./pages/Register";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Error from "./pages/Error";
-import { useContext } from "react";
-import { LoginContext } from "./context/AuthContext";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+} from 'react-router-dom';
+import Register from './pages/Register';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Error from './pages/Error';
+import { useContext } from 'react';
+import { LoginContext } from './context/AuthContext';
+import { SearchContext } from './context/SearchContext';
 
 const App = () => {
   const currentUser = useContext(LoginContext);
+  const [searchOpen, setSearchOpen] = useContext(SearchContext);
+  console.log('The search :', searchOpen);
 
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
@@ -17,7 +25,7 @@ const App = () => {
   };
 
   return (
-    <div className=" w-screen h-screen flex justify-center items-center">
+    <div className=" flex h-screen w-screen items-center justify-center">
       <BrowserRouter>
         <Routes>
           <Route path="/">

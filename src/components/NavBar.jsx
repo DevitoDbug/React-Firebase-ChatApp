@@ -1,13 +1,13 @@
 import {
-  /*faToggleOn,*/ faToggleOff,
+  faToggleOff,
   faToggleOn,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext, useState } from "react";
-import { signOut } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
-import { auth } from "../firebase";
-import { LoginContext } from "../context/AuthContext";
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useContext, useState } from 'react';
+import { signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
+import { auth } from '../firebase';
+import { LoginContext } from '../context/AuthContext';
 
 const NavBar = () => {
   //currently logged in user
@@ -23,25 +23,27 @@ const NavBar = () => {
   const handleSignOut = () => {
     signOut(auth);
     setIsloggedIn(false);
-    navigate("/login");
+    navigate('/login');
   };
 
   return (
-    <div className="px-1 py-1 h-[90%] bg-C_LightBlue flex flex-row items-center justify-between gap-2 rounded-xl m-1">
-      <h1 className="text-C_TextBlack text-xl font-bold ml-1">Artlife</h1>
+    <div className="m-1 flex h-[90%] flex-row items-center justify-between gap-2 rounded-xl bg-C_LightBlue px-1 py-1">
+      <h1 className="ml-1 text-xl font-bold text-C_TextBlack">
+        Artlife
+      </h1>
       <div className="flex flex-row justify-around gap-2">
         <img
-          className="w-10 h-10 border-2 rounded-full border-C_Gold "
+          className="h-10 w-10 rounded-full border-2 border-C_Gold "
           src={profilePic}
           alt=""
         />
-        <div className="flex flex-col items-left">
-          <h2 className="w-[6.625rem] text-C_TextBlack font-semibold ">
+        <div className="items-left flex flex-col">
+          <h2 className="w-[6.625rem] font-semibold text-C_TextBlack ">
             {name}
           </h2>
           <button
             onClick={handleSignOut}
-            className="w-[80%] px-2 py-1 text-sm text-C_TextWhite font-thin bg-C_DarkBlue rounded-3xl flex justify-between items-center md:p-2 "
+            className="flex w-[80%] items-center justify-between rounded-3xl bg-C_DarkBlue px-2 py-1 text-sm font-thin text-C_TextWhite md:p-2 "
           >
             <span className="">log Out</span>
             <FontAwesomeIcon
