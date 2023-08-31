@@ -8,11 +8,11 @@ const Contact = ({ user }) => {
         <img
           src={user.photoURL}
           alt=""
-          className="w-15 h-15 rounded-full border-2 border-C_Gold "
+          className="h-14 w-14 rounded-full border-2 border-C_Gold object-cover "
         />
         <div className="flex flex-col justify-center">
           <span className="text-xs font-semibold text-C_TextWhite">
-            {user.firstName}+ {user.secondName}
+            {user.firstName} {user.secondName}
           </span>
           <span className="text-[0.625rem] font-light text-C_TextWhiteDull ">
             Thank you

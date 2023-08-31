@@ -1,6 +1,5 @@
 import React from 'react';
 import NavBar from './NavBar';
-import Contact from './Contact';
 import OptionsNavBar from './OptionsNavBar';
 
 const ContactChats = () => {
@@ -10,9 +9,7 @@ const ContactChats = () => {
         <NavBar />
       </div>
       <div className="m-1 flex h-[86%] flex-col justify-between rounded-xl bg-C_LightBlue p-4 md:h-[89%] lg:h-[86%]">
-        <div>
-          <Contact />
-        </div>
+        <div>Contact1</div>
         <div className="">
           <OptionsNavBar />
         </div>

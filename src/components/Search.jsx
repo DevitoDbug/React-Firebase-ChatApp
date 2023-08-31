@@ -74,7 +74,6 @@ const Search = () => {
       {searchResults.length <= 0 && (
         <span className="mt-7">No matching results found</span>
       )}
-      {console.log(searchResults)}
       {searchResults.length > 0 && (
         <div className="w-full overflow-y-scroll px-1 py-4">
           {searchResults.map((searchResult, index) => (
