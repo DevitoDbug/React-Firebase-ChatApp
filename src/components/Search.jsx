@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faClose } from '@fortawesome/free-solid-svg-icons';
 import { useContext } from 'react';
@@ -16,9 +16,11 @@ import { db } from '../firebase';
 const Search = () => {
   const [, setSearchOpen] = useContext(SearchContext);
   const [searchedUserName, setSearchedUserName] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
   const handleCloseSearch = () => {
     setSearchOpen(false);
+    setSearchResults([]);
   };
 
   const handleSearch = async () => {
@@ -35,6 +37,7 @@ const Search = () => {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         console.log(doc.id, ' => ', doc.data());
+        setSearchResults((previous) => [...previous, doc]);
       });
     } catch (e) {
       console.log('Fetching data from firestore error: ', e);
@@ -53,6 +56,7 @@ const Search = () => {
         <input
           onChange={(e) => {
             setSearchedUserName(e.target.value);
+            setSearchResults([]);
           }}
           className="w-[95%]  bg-transparent p-3 text-[110%] outline-none"
           type="text"
@@ -67,9 +71,16 @@ const Search = () => {
           />
         </button>
       </div>
-      <div className="w-full px-1 py-4">
-        <Contact />
-      </div>
+      {searchResults.length <= 0 && (
+        <span className="mt-7">No matching results found</span>
+      )}
+      {searchResults.length > 0 && (
+        <div className="w-full overflow-y-scroll px-1 py-4">
+          {searchResults.map((searchResult) => (
+            <Contact key={searchResult.id} user={searchResult} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
