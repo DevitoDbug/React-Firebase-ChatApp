@@ -6,9 +6,12 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
   const [error, setEror] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsTyping(false);
     const email = e.target[0].value;
     const password = e.target[1].value;
 
@@ -27,12 +30,14 @@ const Login = () => {
     >
       <h2 className="text-C_TextBlack text-xl md:text-2xl lg:text-lg">Login</h2>
       <input
+        onChange={() => setIsTyping(true)}
         className="w-[70%] p-3 rounded-md outline-C_DarkBlue md:w-[80%] md:text-2xl lg:text-lg lg:p-2"
         type="text"
         placeholder="Email"
         name="id"
       />
       <input
+        onChange={() => setIsTyping(true)}
         className="w-[70%] p-3 rounded-md outline-C_DarkBlue  md:w-[80%] md:text-2xl lg:text-lg lg:p-2"
         type="password"
         placeholder="Password"
@@ -41,9 +46,12 @@ const Login = () => {
       <button className="text-2xl text-C_TextWhite bg-C_DarkBlue shadow-lg py-2 px-3 rounded-xl md:text-3xl md:mt-3 lg:text-xl lg:mt-3">
         Login
       </button>
-      {error.length > 0 && (
-        <span className="text-sm text-red-600">{error}</span>
+      {!isTyping && error.length > 0 && (
+        <span className="text-sm text-red-600 ">
+          Either password or email is wrong
+        </span>
       )}
+
       <div className="text-sm">
         You don't have an account?
         <Link
