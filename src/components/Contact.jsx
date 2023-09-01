@@ -1,6 +1,16 @@
 import React, { useContext } from 'react';
 import { SearchContext } from '../context/SearchContext';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+  where,
+} from 'firebase/firestore';
 import { db } from '../firebase';
 import { LoginContext } from '../context/AuthContext';
 
@@ -8,12 +18,33 @@ const Contact = ({ user }) => {
   const [, setSearchPanelOpen] = useContext(SearchContext);
   const { currentUser } = useContext(LoginContext);
 
+  console.log(currentUser);
+
   const handleSelect = async () => {
     setSearchPanelOpen(false);
     const combinedId =
       currentUser.uid > user.uid
         ? currentUser.uid + user.uid
         : currentUser.uid + user.uid;
+
+    //Getting info about the current user
+    let currentUserDetails;
+    const q = query(
+      collection(db, 'users'),
+      where('firstName', '==', currentUser.displayName),
+    );
+
+    try {
+      //Searching for a user from firebase
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        currentUserDetails = doc.data();
+      });
+    } catch (e) {
+      console.log('Fetching data from firestore error: ', e);
+    }
+
+    //////////////////////////////
 
     //Checking if there exist a chat between user and selected contact
     const docRef = doc(db, 'chats', combinedId);
@@ -23,28 +54,33 @@ const Contact = ({ user }) => {
       await setDoc(doc(db, 'chats', combinedId), { message: [] });
 
       //Adding user to userChats for both sides
-      await setDoc(doc(db, 'userChat', currentUser.uid), {
-        [combinedId + '.userInfo']: {
-          uid: currentUser.uid,
-          firstName: currentUser.firstName,
-          secondName: currentUser.secondName,
-        },
-        lastText: '',
-        date: 5,
-      });
+      try {
+        await updateDoc(doc(db, 'userChats', currentUser.uid), {
+          [combinedId + '.userInfo']: {
+            uid: currentUser.uid,
+            firstName: currentUserDetails.firstName,
+            secondName: currentUserDetails.secondName,
+          },
+          [combinedId + '.date']: serverTimestamp(),
+        });
+      } catch (error) {
+        console.log(error);
+      }
 
-      await setDoc(doc(db, 'userChat', user.uid), {
-        [combinedId + '.userInfo']: {
-          uid: user.uid,
-          firstName: user.firstName,
-          secondName: user.secondName,
-        },
-        lastText: '',
-        date: 5,
-      });
+      try {
+        await updateDoc(doc(db, 'userChats', user.uid), {
+          [combinedId + '.userInfo']: {
+            uid: user.uid,
+            firstName: user.firstName,
+            secondName: user.secondName,
+          },
+          [combinedId + '.date']: serverTimestamp(),
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
-  console.log({ user });
   return (
     <div
       onClick={handleSelect}
