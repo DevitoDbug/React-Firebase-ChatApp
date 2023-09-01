@@ -77,9 +77,8 @@ const Register = () => {
                 );
               }
 
-              //user chats
               try {
-                await setDoc(doc(db, 'chats', res.user.uid), {});
+                await setDoc(doc(db, 'UserChats', res.user.uid), {});
               } catch (e) {
                 console.log(e);
               }

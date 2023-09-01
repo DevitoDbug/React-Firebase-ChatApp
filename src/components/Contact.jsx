@@ -21,6 +21,27 @@ const Contact = ({ user }) => {
     if (!docSnap.exists()) {
       //create that chat
       await setDoc(doc(db, 'chats', combinedId), { message: [] });
+
+      //Adding user to userChats for both sides
+      await setDoc(doc(db, 'userChat', currentUser.uid), {
+        [combinedId + '.userInfo']: {
+          uid: currentUser.uid,
+          firstName: currentUser.firstName,
+          secondName: currentUser.secondName,
+        },
+        lastText: '',
+        date: 5,
+      });
+
+      await setDoc(doc(db, 'userChat', user.uid), {
+        [combinedId + '.userInfo']: {
+          uid: user.uid,
+          firstName: user.firstName,
+          secondName: user.secondName,
+        },
+        lastText: '',
+        date: 5,
+      });
     }
   };
   console.log({ user });
