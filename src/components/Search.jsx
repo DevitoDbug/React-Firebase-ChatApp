@@ -34,6 +34,7 @@ const Search = () => {
     );
 
     try {
+      //Searching for a user from firebase
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         console.log(doc.id, ' => ', doc.data());

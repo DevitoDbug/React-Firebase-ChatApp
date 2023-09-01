@@ -1,9 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { SearchContext } from '../context/SearchContext';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { db } from '../firebase';
+import { LoginContext } from '../context/AuthContext';
 
 const Contact = ({ user }) => {
+  const [, setSearchPanelOpen] = useContext(SearchContext);
+  const { currentUser } = useContext(LoginContext);
+
+  const handleSelect = async () => {
+    setSearchPanelOpen(false);
+    const combinedId =
+      currentUser.uid > user.uid
+        ? currentUser.uid + user.uid
+        : currentUser.uid + user.uid;
+
+    //Checking if there exist a chat between user and selected contact
+    const docRef = doc(db, 'chats', combinedId);
+    const docSnap = await getDoc(docRef);
+    if (!docSnap.exists()) {
+      //create that chat
+      await setDoc(doc(db, 'chats', combinedId), { message: [] });
+    }
+  };
   console.log({ user });
   return (
-    <div className="flex h-20 w-full flex-row items-center justify-between rounded-xl bg-C_DarkBlue p-2 shadow-lg shadow-C_DarkBlueShadow">
+    <div
+      onClick={handleSelect}
+      className="flex h-20 w-full flex-row items-center justify-between rounded-xl bg-C_DarkBlue p-2 shadow-lg shadow-C_DarkBlueShadow"
+    >
       <div className="flex flex-row gap-2">
         <img
           src={user.photoURL}
