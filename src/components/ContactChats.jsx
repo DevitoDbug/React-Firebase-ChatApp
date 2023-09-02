@@ -34,9 +34,10 @@ const ContactChats = () => {
       </div>
       <div className="m-1 flex h-[86%] flex-col justify-between rounded-xl bg-C_LightBlue p-4 md:h-[89%] lg:h-[86%]">
         <div className="flex flex-col gap-3">
-          {Object.entries(chats).map((user) => (
-            <Contact key={user[0]} user={user[1].userInfo} />
-          ))}
+          {chats &&
+            Object.entries(chats).map((user) => (
+              <Contact key={user[0]} user={user[1].userInfo} />
+            ))}
         </div>
         <div className="">
           <OptionsNavBar />

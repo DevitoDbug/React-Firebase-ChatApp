@@ -15,11 +15,11 @@ import { db } from '../firebase';
 const Search = () => {
   const [, setSearchOpen] = useContext(SearchContext);
   const [searchedUserName, setSearchedUserName] = useState('');
-  const [searchResult, setSearchResult] = useState();
+  const [searchResult, setSearchResult] = useState({});
 
   const handleCloseSearch = () => {
     setSearchOpen(false);
-    setSearchResult();
+    setSearchResult({});
   };
 
   const handleSelectByEnterKey = (event) => {
@@ -31,7 +31,6 @@ const Search = () => {
   const handleSearch = async () => {
     const q = query(
       collection(db, 'users'),
-      // eslint-disable-next-line no-undef
       where('firstName', '==', searchedUserName),
     );
 
@@ -59,7 +58,7 @@ const Search = () => {
           onKeyDown={handleSelectByEnterKey}
           onChange={(e) => {
             setSearchedUserName(e.target.value);
-            setSearchResult();
+            setSearchResult({});
           }}
           className="w-[95%]  bg-transparent p-3 text-[110%] outline-none"
           type="text"
@@ -74,10 +73,11 @@ const Search = () => {
           />
         </button>
       </div>
-      {searchResult.length <= 0 && (
+      {console.log(searchResult.length)}
+      {!searchResult && (
         <span className="mt-7">No matching results found yet</span>
       )}
-      {searchResult.length > 0 && (
+      {searchResult && (
         <div className="w-full overflow-y-scroll px-1 py-4">
           <Contact user={searchResult} />
         </div>
