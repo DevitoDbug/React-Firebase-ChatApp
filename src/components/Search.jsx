@@ -9,18 +9,17 @@ import {
   query,
   where,
   getDocs,
-  or,
 } from 'firebase/firestore';
 import { db } from '../firebase';
 
 const Search = () => {
   const [, setSearchOpen] = useContext(SearchContext);
   const [searchedUserName, setSearchedUserName] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResult, setSearchResult] = useState();
 
   const handleCloseSearch = () => {
     setSearchOpen(false);
-    setSearchResults([]);
+    setSearchResult();
   };
 
   const handleSelectByEnterKey = (event) => {
@@ -33,17 +32,14 @@ const Search = () => {
     const q = query(
       collection(db, 'users'),
       // eslint-disable-next-line no-undef
-      or(
-        where('firstName', '==', searchedUserName),
-        where('lastName', '==', searchedUserName),
-      ),
+      where('firstName', '==', searchedUserName),
     );
 
     try {
       //Searching for a user from firebase
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        setSearchResults((previous) => [...previous, doc.data()]);
+        setSearchResult(doc.data());
       });
     } catch (e) {
       console.log('Fetching data from firestore error: ', e);
@@ -63,7 +59,7 @@ const Search = () => {
           onKeyDown={handleSelectByEnterKey}
           onChange={(e) => {
             setSearchedUserName(e.target.value);
-            setSearchResults([]);
+            setSearchResult();
           }}
           className="w-[95%]  bg-transparent p-3 text-[110%] outline-none"
           type="text"
@@ -78,14 +74,12 @@ const Search = () => {
           />
         </button>
       </div>
-      {searchResults.length <= 0 && (
-        <span className="mt-7">No matching results found</span>
+      {searchResult.length <= 0 && (
+        <span className="mt-7">No matching results found yet</span>
       )}
-      {searchResults.length > 0 && (
+      {searchResult.length > 0 && (
         <div className="w-full overflow-y-scroll px-1 py-4">
-          {searchResults.map((searchResult, index) => (
-            <Contact key={index} user={searchResult} />
-          ))}
+          <Contact user={searchResult} />
         </div>
       )}
     </div>
