@@ -73,10 +73,9 @@ const Search = () => {
           />
         </button>
       </div>
-      {!searchResult && (
-        <span className="mt-7">No matching results found yet</span>
-      )}
-      {searchResult && (
+      {!searchResult || Object.keys(searchResult).length === 0 ? (
+        <span className="mt-7">No matching results {':)'}</span>
+      ) : (
         <div className="w-full overflow-y-scroll px-1 py-4">
           <Contact user={searchResult} />
         </div>
