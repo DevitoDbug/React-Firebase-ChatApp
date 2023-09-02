@@ -73,7 +73,6 @@ const Search = () => {
           />
         </button>
       </div>
-      {console.log(searchResult.length)}
       {!searchResult && (
         <span className="mt-7">No matching results found yet</span>
       )}

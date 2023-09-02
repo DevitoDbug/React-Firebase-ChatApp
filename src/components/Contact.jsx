@@ -18,8 +18,6 @@ const Contact = ({ user }) => {
   const [, setSearchPanelOpen] = useContext(SearchContext);
   const { currentUser } = useContext(LoginContext);
 
-  console.log(user);
-
   const handleSelect = async () => {
     setSearchPanelOpen(false);
     const combinedId =
@@ -57,9 +55,9 @@ const Contact = ({ user }) => {
           doc(db, 'userChats', currentUserDetails.uid),
           {
             [combinedId + '.userInfo']: {
-              uid: currentUserDetails.uid,
-              firstName: currentUserDetails.firstName,
-              secondName: currentUserDetails.secondName,
+              uid: user.uid,
+              firstName: user.firstName,
+              secondName: user.secondName,
             },
             [combinedId + '.date']: serverTimestamp(),
           },
@@ -70,9 +68,9 @@ const Contact = ({ user }) => {
       try {
         await updateDoc(doc(db, 'userChats', user.uid), {
           [combinedId + '.userInfo']: {
-            uid: user.uid,
-            firstName: user.firstName,
-            secondName: user.secondName,
+            uid: currentUserDetails.uid,
+            firstName: currentUserDetails.firstName,
+            secondName: currentUserDetails.secondName,
           },
           [combinedId + '.date']: serverTimestamp(),
         });
