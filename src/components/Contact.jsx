@@ -58,6 +58,7 @@ const Contact = ({ user }) => {
               uid: user.uid,
               firstName: user.firstName,
               secondName: user.secondName,
+              photoURL: user.photoURL,
             },
             [combinedId + '.date']: serverTimestamp(),
           },
@@ -71,6 +72,7 @@ const Contact = ({ user }) => {
             uid: currentUserDetails.uid,
             firstName: currentUserDetails.firstName,
             secondName: currentUserDetails.secondName,
+            photoURL: currentUserDetails.photoURL,
           },
           [combinedId + '.date']: serverTimestamp(),
         });
