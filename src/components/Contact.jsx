@@ -18,8 +18,6 @@ const Contact = ({ user }) => {
   const [, setSearchPanelOpen] = useContext(SearchContext);
   const { currentUser } = useContext(LoginContext);
 
-  console.log(currentUser);
-
   const handleSelect = async () => {
     setSearchPanelOpen(false);
     const combinedId =
@@ -27,7 +25,7 @@ const Contact = ({ user }) => {
         ? currentUser.uid + user.uid
         : currentUser.uid + user.uid;
 
-    //Getting info about the current user
+    //Getting info about the currently loged in  user
     let currentUserDetails;
     const q = query(
       collection(db, 'users'),
@@ -44,29 +42,28 @@ const Contact = ({ user }) => {
       console.log('Fetching data from firestore error: ', e);
     }
 
-    //////////////////////////////
-
     //Checking if there exist a chat between user and selected contact
     const docRef = doc(db, 'chats', combinedId);
     const docSnap = await getDoc(docRef);
     if (!docSnap.exists()) {
       //create that chat
       await setDoc(doc(db, 'chats', combinedId), { message: [] });
-
-      //Adding user to userChats for both sides
+      //Adding user to userChats for both communicators
       try {
-        await updateDoc(doc(db, 'userChats', currentUser.uid), {
-          [combinedId + '.userInfo']: {
-            uid: currentUser.uid,
-            firstName: currentUserDetails.firstName,
-            secondName: currentUserDetails.secondName,
+        await updateDoc(
+          doc(db, 'userChats', currentUserDetails.uid),
+          {
+            [combinedId + '.userInfo']: {
+              uid: currentUserDetails.uid,
+              firstName: currentUserDetails.firstName,
+              secondName: currentUserDetails.secondName,
+            },
+            [combinedId + '.date']: serverTimestamp(),
           },
-          [combinedId + '.date']: serverTimestamp(),
-        });
+        );
       } catch (error) {
         console.log(error);
       }
-
       try {
         await updateDoc(doc(db, 'userChats', user.uid), {
           [combinedId + '.userInfo']: {

@@ -39,7 +39,6 @@ const Register = () => {
         email,
         password,
       );
-      console.log(res);
 
       const storageRef = ref(storage, fname);
 
