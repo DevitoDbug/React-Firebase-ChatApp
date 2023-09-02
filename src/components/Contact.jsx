@@ -18,6 +18,8 @@ const Contact = ({ user }) => {
   const [, setSearchPanelOpen] = useContext(SearchContext);
   const { currentUser } = useContext(LoginContext);
 
+  console.log(user);
+
   const handleSelect = async () => {
     setSearchPanelOpen(false);
     const combinedId =
