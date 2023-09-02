@@ -1,8 +1,32 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import NavBar from './NavBar';
 import OptionsNavBar from './OptionsNavBar';
+import { doc, getDoc, onSnapshot } from 'firebase/firestore';
+import { db } from '../firebase';
+import { LoginContext } from '../context/AuthContext';
 
 const ContactChats = () => {
+  const [chats, setChats] = useState([]);
+  const { currentUser } = useContext(LoginContext);
+
+  useEffect(() => {
+    const getChats = () => {
+      const unsub = onSnapshot(
+        doc(db, 'userChats', currentUser.uid),
+        (doc) => {
+          setChats(doc.data());
+        },
+      );
+      return () => {
+        unsub();
+      };
+    };
+
+    currentUser.uid && getChats();
+  }, [currentUser.uid]);
+
+  console.log(chats);
+
   return (
     <aside className="h-full w-screen flex-shrink-0 md:w-2/6 ">
       <div className=" md:show h-[12%] md:h-[10%] lg:h-[12%]">
