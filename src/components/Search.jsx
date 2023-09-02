@@ -23,6 +23,12 @@ const Search = () => {
     setSearchResults([]);
   };
 
+  const handleSelectByEnterKey = (event) => {
+    if (event.key === 'Enter' || event.keyCode === 13) {
+      handleSearch();
+    }
+  };
+
   const handleSearch = async () => {
     const q = query(
       collection(db, 'users'),
@@ -54,6 +60,7 @@ const Search = () => {
       </button>
       <div className=" flex flex-row items-center justify-between border-b-2 border-gray-300">
         <input
+          onKeyDown={handleSelectByEnterKey}
           onChange={(e) => {
             setSearchedUserName(e.target.value);
             setSearchResults([]);
