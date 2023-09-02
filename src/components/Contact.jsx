@@ -45,9 +45,10 @@ const Contact = ({ user }) => {
     }
 
     //Checking if there exist a chat between user and selected contact
+    //Also check if user is trying to make a chat to himself
     const docRef = doc(db, 'chats', combinedId);
     const docSnap = await getDoc(docRef);
-    if (!docSnap.exists()) {
+    if (!docSnap.exists() && user.uid != currentUser.uid) {
       //create that chat
       await setDoc(doc(db, 'chats', combinedId), { message: [] });
       //Adding user to userChats for both communicators
