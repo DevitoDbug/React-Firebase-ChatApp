@@ -13,10 +13,12 @@ import {
 } from 'firebase/firestore';
 import { db } from '../firebase';
 import { LoginContext } from '../context/AuthContext';
+import { ChatContext } from '../context/ChatContext';
 
 const Contact = ({ user, index, selected, setSelected }) => {
   const [, setSearchPanelOpen] = useContext(SearchContext);
   const { currentUser } = useContext(LoginContext);
+  const { dispatch } = useContext(ChatContext);
 
   const darkBg =
     index === selected
@@ -26,6 +28,9 @@ const Contact = ({ user, index, selected, setSelected }) => {
   const handleSelect = async () => {
     setSearchPanelOpen(false);
     setSelected && setSelected(index);
+
+    //setting chat context
+    dispatch({ type: 'CHANGE_CHAT_RECIPIENT', payload: user });
 
     const combinedId =
       currentUser.uid > user.uid
@@ -88,7 +93,9 @@ const Contact = ({ user, index, selected, setSelected }) => {
       }
     }
   };
+
   return (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
       onClick={handleSelect}
       className={`flex h-20 w-full flex-row items-center justify-between p-2 ${darkBg} `}

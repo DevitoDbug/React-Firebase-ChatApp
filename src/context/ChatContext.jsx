@@ -1,5 +1,4 @@
-const { createContext } = require('react');
-import React, { useContext, useReducer } from 'react';
+import React, { createContext, useContext, useReducer } from 'react';
 import { LoginContext } from './AuthContext';
 
 export const ChatContext = createContext();
@@ -9,7 +8,7 @@ const ChatContextProider = ({ children }) => {
 
   const reducer = (state, action) => {
     switch (action.type) {
-      case 'CHANGE_CHAT':
+      case 'CHANGE_CHAT_RECIPIENT':
         return {
           userInfo: action.payload,
           chatId:
@@ -18,7 +17,7 @@ const ChatContextProider = ({ children }) => {
               : currentUser.uid + action.payload.uid,
         };
       default:
-        throw new Error();
+        throw new Error('That action type is not defined');
     }
   };
 
@@ -28,6 +27,7 @@ const ChatContextProider = ({ children }) => {
   };
 
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
+
   return (
     <ChatContext.Provider value={{ data: state, dispatch }}>
       {children}
