@@ -10,6 +10,8 @@ const ContactChats = () => {
   const [chats, setChats] = useState([]);
   const { currentUser } = useContext(LoginContext);
 
+  const [selectedContact, setSelectedContact] = useState(null);
+
   //fetches chats everytime user changes
   useEffect(() => {
     const getChats = () => {
@@ -35,8 +37,14 @@ const ContactChats = () => {
       <div className="m-1 flex h-[86%] flex-col justify-between rounded-xl bg-C_LightBlue p-4 md:h-[89%] lg:h-[86%]">
         <div className="flex flex-col gap-3">
           {chats &&
-            Object.entries(chats).map((user) => (
-              <Contact key={user[0]} user={user[1].userInfo} />
+            Object.entries(chats).map((user, index) => (
+              <Contact
+                key={user[0]}
+                user={user[1].userInfo}
+                index={index}
+                selected={selectedContact}
+                setSelected={setSelectedContact}
+              />
             ))}
         </div>
         <div className="">
