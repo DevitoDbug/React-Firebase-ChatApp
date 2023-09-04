@@ -27,7 +27,7 @@ const ContactChats = () => {
     };
 
     currentUser.uid && getChats();
-  }, [currentUser.uid]);
+  }, [currentUser?.uid]);
 
   return (
     <aside className="h-full w-screen flex-shrink-0 md:w-2/6 ">

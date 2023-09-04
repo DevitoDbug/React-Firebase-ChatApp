@@ -14,7 +14,7 @@ const ChatContextProider = ({ children }) => {
           chatId:
             currentUser.uid > action.payload.uid
               ? currentUser.uid + action.payload.uid
-              : currentUser.uid + action.payload.uid,
+              : action.payload.uid + currentUser.uid,
         };
       default:
         throw new Error('That action type is not defined');

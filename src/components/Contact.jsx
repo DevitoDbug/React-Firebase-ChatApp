@@ -35,7 +35,7 @@ const Contact = ({ user, index, selected, setSelected }) => {
     const combinedId =
       currentUser.uid > user.uid
         ? currentUser.uid + user.uid
-        : currentUser.uid + user.uid;
+        : user.uid + currentUser.uid;
 
     //Getting info about the currently loged in  user
     let currentUserDetails;
