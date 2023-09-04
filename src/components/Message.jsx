@@ -1,9 +1,10 @@
 import React from 'react';
 
-const Message = () => {
+const Message = ({ data }) => {
+  console.log(data);
   return (
     <div className="sms owner-sms">
-      <span className="sms-user-name">Ochieng</span>
+      <span className="sms-user-name">{data.firstName}</span>
       <div className="sms-info">
         <img
           src="../../public/profileImage.png"
