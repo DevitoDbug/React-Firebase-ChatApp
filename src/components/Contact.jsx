@@ -25,7 +25,7 @@ const Contact = ({ user, index, selected, setSelected }) => {
 
   const handleSelect = async () => {
     setSearchPanelOpen(false);
-    setSelected(index);
+    setSelected && setSelected(index);
 
     const combinedId =
       currentUser.uid > user.uid
