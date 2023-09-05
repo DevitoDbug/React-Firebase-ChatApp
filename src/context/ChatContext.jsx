@@ -22,7 +22,7 @@ const ChatContextProider = ({ children }) => {
   };
 
   const INITIAL_STATE = {
-    combinedId: '',
+    combinedId: 'null',
     userInfo: {},
   };
 

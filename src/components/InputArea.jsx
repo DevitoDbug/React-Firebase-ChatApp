@@ -39,15 +39,19 @@ const InputArea = () => {
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(
             async (downloadURL) => {
-              await updateDoc(doc(db, 'chats', data.combinedId), {
-                messages: arrayUnion({
-                  id: uuid(),
-                  text,
-                  imageURL: downloadURL,
-                  senderId: data.userInfo.uid,
-                  date: Timestamp.now(),
-                }),
-              });
+              try {
+                await updateDoc(doc(db, 'chats', data.combinedId), {
+                  messages: arrayUnion({
+                    id: uuid(),
+                    text,
+                    imageURL: downloadURL,
+                    senderId: data.userInfo.uid,
+                    date: Timestamp.now(),
+                  }),
+                });
+              } catch (e) {
+                console.log(e);
+              }
             },
           );
         },
@@ -63,6 +67,7 @@ const InputArea = () => {
       });
     }
     setText('');
+    setImage(null);
   };
 
   return (
@@ -78,7 +83,9 @@ const InputArea = () => {
           <label htmlFor="image">
             <FontAwesomeIcon
               icon={faPaperclip}
-              className="ml-2 text-xl text-C_UserDullBlack"
+              className={`ml-2 text-xl  ${
+                img ? 'text-C_DarkBlue' : 'text-C_UserDullBlack'
+              }`}
             />
           </label>
           <FontAwesomeIcon
