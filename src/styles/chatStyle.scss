@@ -13,6 +13,7 @@
     flex-direction: row;
     gap: 0.7rem;
     .sms-content {
+      max-width: 60%;
       color: #52585d;
       font-weight: 400;
       background-color: #e3f6fc;
