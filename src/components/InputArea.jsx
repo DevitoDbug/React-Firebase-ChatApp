@@ -28,8 +28,6 @@ const InputArea = () => {
   const [text, setText] = useState('');
   const [img, setImage] = useState(null);
 
-  const [inputValue, setInputValue] = useState('');
-
   const handleSend = async () => {
     if (img) {
       const storageRef = ref(storage, uuid());
@@ -77,7 +75,6 @@ const InputArea = () => {
   };
 
   const resetTextarea = () => {
-    setInputValue('');
     // Reset the textarea's height to the original value (adjust this value as needed)
     const originalHeight = '3rem'; // You can adjust this value based on your design
     document.getElementById('expanding-textarea').style.height =
@@ -112,7 +109,6 @@ const InputArea = () => {
           style={{ height: '3rem' }}
           onChange={(e) => {
             setText(e.target.value);
-            setInputValue(e.target.value);
           }}
           rows="1"
           className="h-auto w-[70%] resize-none justify-end outline-none"
