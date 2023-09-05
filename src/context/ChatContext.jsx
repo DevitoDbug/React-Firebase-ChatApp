@@ -11,7 +11,7 @@ const ChatContextProider = ({ children }) => {
       case 'CHANGE_CHAT_RECIPIENT':
         return {
           userInfo: action.payload,
-          chatId:
+          combinedId:
             currentUser.uid > action.payload.uid
               ? currentUser.uid + action.payload.uid
               : action.payload.uid + currentUser.uid,
@@ -22,7 +22,7 @@ const ChatContextProider = ({ children }) => {
   };
 
   const INITIAL_STATE = {
-    chatId: '',
+    combinedId: '',
     userInfo: {},
   };
 
