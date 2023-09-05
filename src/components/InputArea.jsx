@@ -75,7 +75,7 @@ const InputArea = () => {
 
   return (
     <div>
-      <div className="justify-aroun absolute flex h-auto w-full resize-y flex-row items-center gap-2 rounded-lg border-2 border-C_GreyBorder bg-C_WhiteBright p-1">
+      <div className=" absolute flex h-auto w-full resize-y flex-row items-center justify-around gap-2 rounded-lg border-2 border-C_GreyBorder bg-C_WhiteBright p-1">
         <div className="flex items-center justify-center gap-1">
           <input
             onChange={(e) => setImage(e.target.files[0])}
