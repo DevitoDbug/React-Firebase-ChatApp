@@ -5,24 +5,64 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useState } from 'react';
-import { doc, updateDoc, arrayUnion } from 'firebase/firestore';
-import { db } from '../firebase';
+import {
+  doc,
+  updateDoc,
+  arrayUnion,
+  Timestamp,
+} from 'firebase/firestore';
+import { db, storage } from '../firebase';
 import { ChatContext } from '../context/ChatContext';
+import {
+  getDownloadURL,
+  ref,
+  uploadBytesResumable,
+} from 'firebase/storage';
+import { v4 as uuid } from 'uuid';
 
 const InputArea = () => {
   const { data } = useContext(ChatContext);
-  console.log(data);
   const [text, setText] = useState('');
   const [img, setImage] = useState(null);
 
   const handleSend = async () => {
     if (img) {
-      //img
+      const storageRef = ref(storage, uuid());
+      const uploadTask = uploadBytesResumable(storageRef, img);
+      uploadTask.on(
+        (error) => {
+          console.log(
+            'There  was a failure on the upload\n ERROR: ',
+            error,
+          );
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then(
+            async (downloadURL) => {
+              await updateDoc(doc(db, 'chats', data.combinedId), {
+                messages: arrayUnion({
+                  id: uuid(),
+                  text,
+                  imageURL: downloadURL,
+                  senderId: data.userInfo.uid,
+                  date: Timestamp.now(),
+                }),
+              });
+            },
+          );
+        },
+      );
     } else {
       await updateDoc(doc(db, 'chats', data.combinedId), {
-        regions: arrayUnion('greater_virginia'),
+        messages: arrayUnion({
+          id: uuid(),
+          text,
+          senderId: data.userInfo.uid,
+          date: Timestamp.now(),
+        }),
       });
     }
+    setText('');
   };
 
   return (
@@ -32,7 +72,7 @@ const InputArea = () => {
           <input
             onChange={(e) => setImage(e.target.files[0])}
             type="file"
-            name="image"
+            id="image"
             className="hidden"
           />
           <label htmlFor="image">
