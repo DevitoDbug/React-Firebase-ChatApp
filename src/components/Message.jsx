@@ -3,7 +3,6 @@ import { LoginContext } from '../context/AuthContext';
 
 const Message = ({ data, message }) => {
   const { currentUser } = useContext(LoginContext);
-  console.log(message, currentUser);
   return (
     <div
       className={`sms ${
@@ -17,11 +16,19 @@ const Message = ({ data, message }) => {
           alt="profile"
           className="h-8 w-8 rounded-full border-2 border-C_Gold "
         />
+
         <div className="sms-content">
           {message.text}
           <span>
             {message.date.toDate().toLocaleDateString('en-US')}
           </span>
+          {message.imageURL && (
+            <img
+              src={message.imageURL}
+              alt="pic"
+              className="block "
+            />
+          )}
         </div>
       </div>
     </div>
