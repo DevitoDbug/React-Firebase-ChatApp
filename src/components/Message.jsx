@@ -18,12 +18,14 @@ const Message = ({ data, message }) => {
         />
 
         <div className="sms-content">
-          <div className="sms-content-text">
-            {message.text}
-            <span>
-              {message.date.toDate().toLocaleDateString('en-US')}
-            </span>
-          </div>
+          {message.text && (
+            <div className="sms-content-text">
+              {message.text}
+              <span>
+                {message.date.toDate().toLocaleDateString('en-US')}
+              </span>
+            </div>
+          )}
           {message.imageURL && (
             <img
               src={message.imageURL}
