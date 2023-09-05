@@ -19,9 +19,12 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage';
 import { v4 as uuid } from 'uuid';
+import { LoginContext } from '../context/AuthContext';
 
 const InputArea = () => {
   const { data } = useContext(ChatContext);
+  const { currentUser } = useContext(LoginContext);
+
   const [text, setText] = useState('');
   const [img, setImage] = useState(null);
 
@@ -45,7 +48,7 @@ const InputArea = () => {
                     id: uuid(),
                     text,
                     imageURL: downloadURL,
-                    senderId: data.userInfo.uid,
+                    senderId: currentUser.uid,
                     date: Timestamp.now(),
                   }),
                 });
@@ -61,7 +64,7 @@ const InputArea = () => {
         messages: arrayUnion({
           id: uuid(),
           text,
-          senderId: data.userInfo.uid,
+          senderId: currentUser.uid,
           date: Timestamp.now(),
         }),
       });
