@@ -25,7 +25,7 @@ const App = () => {
     <div className=" flex h-screen w-screen items-center justify-center">
       <BrowserRouter>
         <Routes>
-          <Route path="/">
+          <Route path="/*">
             <Route
               index
               element={

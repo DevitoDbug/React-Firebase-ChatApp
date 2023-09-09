@@ -9,7 +9,7 @@ const Home = () => {
   const [searchOpen] = useContext(SearchContext);
   return (
     <div className="relative h-full w-screen">
-      <div className="relative flex h-full overflow-x-scroll">
+      <div className="relative flex h-full overflow-x-hidden">
         <ContactChats />
         <MessageSection />
       </div>
