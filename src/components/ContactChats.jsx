@@ -6,7 +6,7 @@ import { db } from '../firebase';
 import { LoginContext } from '../context/AuthContext';
 import Contact from './Contact';
 
-const ContactChats = () => {
+const ContactChats = ({ scrollToMessageSection }) => {
   const [chats, setChats] = useState([]);
   const { currentUser } = useContext(LoginContext);
 
@@ -48,7 +48,9 @@ const ContactChats = () => {
             ))}
         </div>
         <div className="">
-          <OptionsNavBar />
+          <OptionsNavBar
+            scrollToMessageSection={scrollToMessageSection}
+          />
         </div>
       </div>
     </aside>

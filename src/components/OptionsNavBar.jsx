@@ -9,7 +9,7 @@ import React from 'react';
 import { useContext } from 'react';
 import { SearchContext } from '../context/SearchContext';
 
-const OptionsNavBar = () => {
+const OptionsNavBar = ({ scrollToMessageSection }) => {
   const [, setSearchOpen] = useContext(SearchContext);
   const handleOpenSearch = () => {
     setSearchOpen(true);
@@ -27,6 +27,9 @@ const OptionsNavBar = () => {
         <FontAwesomeIcon
           icon={faMessage}
           className="ml-2 text-xl text-C_UserDullBlack"
+          onClick={() => {
+            scrollToMessageSection();
+          }}
         />
       </button>
       <button>

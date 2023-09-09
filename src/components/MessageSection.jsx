@@ -5,8 +5,10 @@ import InputArea from './InputArea';
 import { ChatContext } from '../context/ChatContext';
 import { db } from '../firebase';
 import { doc, onSnapshot } from 'firebase/firestore';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
-const MessageSection = () => {
+const MessageSection = ({ scrollToContactSection }) => {
   // const { currentUser } = useContext(LoginContext);
   const { data } = useContext(ChatContext);
   const [messages, setMessages] = useState([]);
@@ -25,6 +27,12 @@ const MessageSection = () => {
 
   return (
     <div className=" h-screen w-screen flex-shrink-0 p-2 md:w-4/6 ">
+      <button
+        className="h-9 w-9 rounded-full bg-C_DarkBlue text-lg text-C_TextWhiteDull"
+        onClick={() => scrollToContactSection()}
+      >
+        <FontAwesomeIcon icon={faArrowLeft} />
+      </button>
       <div className="h-[89vh] overflow-y-scroll sm:h-[85vh] md:h-[93vh] lg:h-[85vh]">
         {messages &&
           messages.map((message) => (
@@ -35,7 +43,7 @@ const MessageSection = () => {
             />
           ))}
       </div>
-      <div className=" h-[7vh] sm:h-[15vh]  md:h-[7vh]  lg:h-[15vh]">
+      <div className="h-[7vh] sm:h-[15vh]  md:h-[7vh]  lg:h-[15vh]">
         <InputArea />
       </div>
     </div>
