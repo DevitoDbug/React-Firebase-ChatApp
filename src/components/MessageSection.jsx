@@ -33,7 +33,7 @@ const MessageSection = ({ scrollToContactSection }) => {
       >
         <FontAwesomeIcon icon={faArrowLeft} />
       </button>
-      <div className="h-[85%] overflow-y-scroll sm:h-[85vh] md:h-[93vh] lg:h-[85vh]">
+      <div className="h-[93%] overflow-y-scroll sm:h-[85vh] md:h-[93vh] lg:h-[85vh]">
         {messages &&
           messages.map((message) => (
             <Message

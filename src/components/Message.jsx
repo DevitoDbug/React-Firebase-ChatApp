@@ -3,16 +3,25 @@ import { LoginContext } from '../context/AuthContext';
 
 const Message = ({ data, message }) => {
   const { currentUser } = useContext(LoginContext);
+  console.log('current user ', currentUser);
   return (
     <div
       className={`sms ${
         currentUser.uid === message.senderId ? 'owner-sms' : ''
       }`}
     >
-      <span className="sms-user-name">{data?.firstName}</span>
+      <span className="sms-user-name">
+        {currentUser.uid === message.senderId
+          ? currentUser.displayName
+          : data?.firstName}
+      </span>
       <div className="sms-info">
         <img
-          src={data?.photoURL}
+          src={
+            currentUser.uid === message.senderId
+              ? currentUser.photoURL
+              : data?.photoURL
+          }
           alt="profile"
           className="h-8 w-8 rounded-full border-2 border-C_Gold "
         />
