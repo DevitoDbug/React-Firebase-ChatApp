@@ -26,13 +26,14 @@ const MessageSection = () => {
   return (
     <div className=" h-screen w-screen flex-shrink-0 p-2 md:w-4/6 ">
       <div className="h-[89vh] overflow-y-scroll sm:h-[85vh] md:h-[93vh] lg:h-[85vh]">
-        {messages.map((message) => (
-          <Message
-            key={message?.id}
-            message={message}
-            data={data.userInfo}
-          />
-        ))}
+        {messages &&
+          messages.map((message) => (
+            <Message
+              key={message?.id}
+              message={message}
+              data={data.userInfo}
+            />
+          ))}
       </div>
       <div className=" h-[7vh] sm:h-[15vh]  md:h-[7vh]  lg:h-[15vh]">
         <InputArea />
