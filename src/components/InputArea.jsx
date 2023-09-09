@@ -82,8 +82,8 @@ const InputArea = () => {
   };
 
   return (
-    <div className="w-full">
-      <div className=" absolute flex h-auto w-[95%] resize-y flex-row items-center justify-around gap-2 rounded-lg border-2 border-C_GreyBorder bg-C_WhiteBright p-1">
+    <div className="">
+      <div className=" absolute flex h-auto w-[95%] resize-y flex-row items-center justify-around gap-2 rounded-lg border-2 border-C_GreyBorder bg-C_WhiteBright  p-1">
         <div className="flex items-center justify-center gap-1">
           <input
             onChange={(e) => setImage(e.target.files[0])}
@@ -111,7 +111,7 @@ const InputArea = () => {
             setText(e.target.value);
           }}
           rows="1"
-          className="h-auto w-[70%] resize-none justify-end outline-none"
+          className="h-auto max-h-14 w-[70%] resize-none justify-end outline-none"
           placeholder="Type new message..."
           onInput={(e) => {
             e.target.style.height = 'auto';

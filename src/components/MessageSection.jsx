@@ -26,14 +26,14 @@ const MessageSection = ({ scrollToContactSection }) => {
   }, [data.combinedId]);
 
   return (
-    <div className=" h-screen w-screen flex-shrink-0 p-2 md:w-4/6 ">
+    <div className="relative h-screen w-screen flex-shrink-0 p-2 md:w-4/6 ">
       <button
-        className="h-9 w-9 rounded-full bg-C_DarkBlue text-lg text-C_TextWhiteDull"
+        className="absolute h-9 w-9 rounded-full bg-C_DarkBlue text-lg text-C_TextWhiteDull"
         onClick={() => scrollToContactSection()}
       >
         <FontAwesomeIcon icon={faArrowLeft} />
       </button>
-      <div className="h-[89vh] overflow-y-scroll sm:h-[85vh] md:h-[93vh] lg:h-[85vh]">
+      <div className="h-[85%] overflow-y-scroll sm:h-[85vh] md:h-[93vh] lg:h-[85vh]">
         {messages &&
           messages.map((message) => (
             <Message
@@ -43,7 +43,7 @@ const MessageSection = ({ scrollToContactSection }) => {
             />
           ))}
       </div>
-      <div className="h-[7vh] sm:h-[15vh]  md:h-[7vh]  lg:h-[15vh]">
+      <div className="h-[5%] sm:h-[15vh]  md:h-[7vh]  lg:h-[15vh]">
         <InputArea />
       </div>
     </div>
