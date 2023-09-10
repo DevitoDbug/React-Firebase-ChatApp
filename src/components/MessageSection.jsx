@@ -23,6 +23,7 @@ const MessageSection = () => {
     );
     return () => {
       unSub();
+      setMessages([]);
     };
   }, [data.combinedId]);
 
