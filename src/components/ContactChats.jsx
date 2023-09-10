@@ -32,7 +32,7 @@ const ContactChats = () => {
   }, [currentUser?.uid]);
 
   return (
-    <aside className="h-full w-screen flex-shrink-0 md:w-2/6 ">
+    <aside className=" h-full w-screen flex-shrink-0 md:w-full">
       <div className=" md:show h-[12%] md:h-[10%] lg:h-[12%]">
         <NavBar />
       </div>

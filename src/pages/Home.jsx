@@ -29,24 +29,21 @@ const Home = () => {
   };
 
   return (
-    <div className="relative h-full w-screen">
-      <div className="relative flex h-full overflow-x-hidden">
-        <NavContext.Provider
-          value={{ scrollToMessageSection, scrollToContactSection }}
-        >
-          <div ref={contactSectionRef}>
+    <NavContext.Provider
+      value={{ scrollToMessageSection, scrollToContactSection }}
+    >
+      <div className="h-full w-screen">
+        <div className="relative flex h-full w-full overflow-x-hidden ">
+          <div className="w-2/6" ref={contactSectionRef}>
             <ContactChats />
           </div>
-          <div ref={messageSectionRef}>
-            <MessageSection
-              scrollToContactSection={scrollToContactSection}
-            />
+          <div className="w-4/6" ref={messageSectionRef}>
+            <MessageSection />
           </div>
-          
-        </NavContext.Provider>
+        </div>
+        {searchOpen && <Search />}
       </div>
-      {searchOpen && <Search />}
-    </div>
+    </NavContext.Provider>
   );
 };
 

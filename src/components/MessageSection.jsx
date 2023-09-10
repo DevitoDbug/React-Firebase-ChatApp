@@ -27,9 +27,9 @@ const MessageSection = () => {
   }, [data.combinedId]);
 
   return (
-    <div className="relative h-screen w-screen flex-shrink-0 p-2 md:w-4/6 ">
+    <div className="relative h-screen w-screen flex-shrink-0 p-2 md:w-full ">
       <button
-        className="absolute h-9 w-9 rounded-full bg-C_DarkBlue text-lg text-C_TextWhiteDull"
+        className="absolute h-9 w-9 rounded-full bg-C_DarkBlue text-lg text-C_TextWhiteDull md:hidden"
         onClick={() => scrollToContactSection()}
       >
         <FontAwesomeIcon icon={faArrowLeft} />
