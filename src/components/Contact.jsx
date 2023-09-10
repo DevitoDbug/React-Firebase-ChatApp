@@ -31,9 +31,6 @@ const Contact = ({ user, index, selected, setSelected }) => {
     setSearchPanelOpen(false);
     setSelected && setSelected(index);
 
-    //Navigaiton to messages
-    scrollToMessageSection();
-
     //setting chat context
     dispatch({ type: 'CHANGE_CHAT_RECIPIENT', payload: user });
 
@@ -97,6 +94,9 @@ const Contact = ({ user, index, selected, setSelected }) => {
         console.log(error);
       }
     }
+
+    //Navigaiton to messages
+    scrollToMessageSection();
   };
 
   return (
