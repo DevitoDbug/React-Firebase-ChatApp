@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import ContactChats from '../components/ContactChats';
 import MessageSection from '../components/MessageSection';
 import Search from '../components/Search';

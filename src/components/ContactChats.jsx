@@ -33,10 +33,10 @@ const ContactChats = () => {
 
   return (
     <aside className=" h-full w-screen flex-shrink-0 md:w-full">
-      <div className=" md:show h-[12%] md:h-[10%] lg:h-[12%]">
+      <div className=" h-[12%] md:mt-2 md:h-[9%] lg:h-[15%]">
         <NavBar />
       </div>
-      <div className="m-1 flex h-[86%] flex-col justify-between rounded-xl bg-C_LightBlue p-4 md:h-[89%] lg:h-[86%]">
+      <div className="m-1 flex h-[86%] flex-col justify-between rounded-xl bg-C_LightBlue p-4 md:h-[89%] lg:h-[81%]">
         <div className="flex flex-col gap-3">
           {chats &&
             Object.entries(chats).map((user, index) => (
