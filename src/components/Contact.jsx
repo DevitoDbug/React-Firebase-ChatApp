@@ -14,11 +14,13 @@ import {
 import { db } from '../firebase';
 import { LoginContext } from '../context/AuthContext';
 import { ChatContext } from '../context/ChatContext';
+import { NavContext } from '../pages/Home';
 
 const Contact = ({ user, index, selected, setSelected }) => {
   const [, setSearchPanelOpen] = useContext(SearchContext);
   const { currentUser } = useContext(LoginContext);
   const { dispatch } = useContext(ChatContext);
+  const { scrollToMessageSection } = useContext(NavContext);
 
   const darkBg =
     index === selected
@@ -28,6 +30,9 @@ const Contact = ({ user, index, selected, setSelected }) => {
   const handleSelect = async () => {
     setSearchPanelOpen(false);
     setSelected && setSelected(index);
+
+    //Navigaiton to messages
+    scrollToMessageSection();
 
     //setting chat context
     dispatch({ type: 'CHANGE_CHAT_RECIPIENT', payload: user });

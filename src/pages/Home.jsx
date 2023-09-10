@@ -42,6 +42,7 @@ const Home = () => {
               scrollToContactSection={scrollToContactSection}
             />
           </div>
+          
         </NavContext.Provider>
       </div>
       {searchOpen && <Search />}
