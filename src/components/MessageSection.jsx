@@ -7,11 +7,12 @@ import { db } from '../firebase';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { NavContext } from '../pages/Home';
 
-const MessageSection = ({ scrollToContactSection }) => {
-  // const { currentUser } = useContext(LoginContext);
+const MessageSection = () => {
   const { data } = useContext(ChatContext);
   const [messages, setMessages] = useState([]);
+  const { scrollToContactSection } = useContext(NavContext);
 
   useEffect(() => {
     const unSub = onSnapshot(

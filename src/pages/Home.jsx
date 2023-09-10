@@ -2,8 +2,10 @@ import React, { useRef } from 'react';
 import ContactChats from '../components/ContactChats';
 import MessageSection from '../components/MessageSection';
 import Search from '../components/Search';
-import { useContext } from 'react';
+import { useContext, createContext } from 'react';
 import { SearchContext } from '../context/SearchContext';
+
+export const NavContext = createContext();
 
 const Home = () => {
   const [searchOpen] = useContext(SearchContext);
@@ -29,17 +31,18 @@ const Home = () => {
   return (
     <div className="relative h-full w-screen">
       <div className="relative flex h-full overflow-x-hidden">
-        <div ref={contactSectionRef}>
-          <ContactChats
-            scrollToMessageSection={scrollToMessageSection}
-          />
-        </div>
-
-        <div ref={messageSectionRef}>
-          <MessageSection
-            scrollToContactSection={scrollToContactSection}
-          />
-        </div>
+        <NavContext.Provider
+          value={{ scrollToMessageSection, scrollToContactSection }}
+        >
+          <div ref={contactSectionRef}>
+            <ContactChats />
+          </div>
+          <div ref={messageSectionRef}>
+            <MessageSection
+              scrollToContactSection={scrollToContactSection}
+            />
+          </div>
+        </NavContext.Provider>
       </div>
       {searchOpen && <Search />}
     </div>

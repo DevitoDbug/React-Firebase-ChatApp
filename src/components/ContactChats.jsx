@@ -5,10 +5,12 @@ import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
 import { LoginContext } from '../context/AuthContext';
 import Contact from './Contact';
+import { NavContext } from '../pages/Home';
 
-const ContactChats = ({ scrollToMessageSection }) => {
+const ContactChats = () => {
   const [chats, setChats] = useState([]);
   const { currentUser } = useContext(LoginContext);
+  const { scrollToMessageSection } = useContext(NavContext);
 
   const [selectedContact, setSelectedContact] = useState(null);
 
