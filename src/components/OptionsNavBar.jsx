@@ -8,42 +8,86 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useContext } from 'react';
 import { SearchContext } from '../context/SearchContext';
+import { CurrentPageContext } from '../context/CurrentPageContex';
 
 const OptionsNavBar = ({ scrollToMessageSection }) => {
+  const { currentPage, setCurrentPage } = useContext(
+    CurrentPageContext,
+  );
   const [, setSearchOpen] = useContext(SearchContext);
   const handleOpenSearch = () => {
     setSearchOpen(true);
+    setCurrentPage('searchPage');
   };
 
   return (
     <div className="flex w-full flex-row items-center justify-center gap-1 border-t-2 border-C_BorderLightBlue p-2">
-      <button>
-        <FontAwesomeIcon
-          icon={faUserGroup}
-          className="ml-2 text-xl text-C_UserDullBlack"
-        />
-      </button>
-      <button>
-        <FontAwesomeIcon
-          icon={faMessage}
-          className="ml-2 text-xl text-C_UserDullBlack"
-          onClick={() => {
-            scrollToMessageSection();
-          }}
-        />
-      </button>
-      <button>
-        <FontAwesomeIcon
-          icon={faStar}
-          className="ml-2 text-xl text-C_UserDullBlack"
-        />
-      </button>
-      <button onClick={handleOpenSearch}>
-        <FontAwesomeIcon
-          icon={faSearch}
-          className="ml-2 text-xl text-C_UserDullBlack"
-        />
-      </button>
+      <div className=" flex flex-col items-center justify-center">
+        <button>
+          <FontAwesomeIcon
+            icon={faUserGroup}
+            className="  text-xl text-C_UserDullBlack"
+          />
+        </button>
+        <div
+          className={`h-1 w-[75%] rounded-xl  ${
+            currentPage == 'groupPage'
+              ? 'bg-C_DarkBlue'
+              : 'bg-transparent'
+          }`}
+        ></div>
+      </div>
+
+      <div className="ml-2 flex flex-col items-center justify-center">
+        <button>
+          <FontAwesomeIcon
+            icon={faMessage}
+            className=" text-xl text-C_UserDullBlack"
+            onClick={() => {
+              scrollToMessageSection();
+            }}
+          />
+        </button>
+        <div
+          className={`h-1 w-[75%] rounded-xl  ${
+            currentPage == 'contactPage'
+              ? 'bg-C_DarkBlue'
+              : 'bg-transparent'
+          }`}
+        ></div>
+      </div>
+
+      <div className="ml-2 flex flex-col items-center justify-center">
+        <button>
+          <FontAwesomeIcon
+            icon={faStar}
+            className="text-xl text-C_UserDullBlack"
+          />
+        </button>
+        <div
+          className={`h-1 w-[75%] rounded-xl  ${
+            currentPage == 'starPage'
+              ? 'bg-C_DarkBlue'
+              : 'bg-transparent'
+          }`}
+        ></div>
+      </div>
+
+      <div className="ml-2 flex flex-col items-center justify-center">
+        <button onClick={handleOpenSearch}>
+          <FontAwesomeIcon
+            icon={faSearch}
+            className="text-xl text-C_UserDullBlack"
+          />
+        </button>
+        <div
+          className={`h-1 w-[75%] rounded-xl  ${
+            currentPage == 'searchPage'
+              ? 'bg-C_DarkBlue'
+              : 'bg-transparent'
+          }`}
+        ></div>
+      </div>
     </div>
   );
 };

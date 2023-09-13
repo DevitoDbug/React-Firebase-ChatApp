@@ -4,6 +4,7 @@ import MessageSection from '../components/MessageSection';
 import Search from '../components/Search';
 import { useContext, createContext } from 'react';
 import { SearchContext } from '../context/SearchContext';
+import { CurrentPageContext } from '../context/CurrentPageContex';
 
 export const NavContext = createContext();
 
@@ -11,6 +12,7 @@ const Home = () => {
   const [searchOpen] = useContext(SearchContext);
   const messageSectionRef = useRef();
   const contactSectionRef = useRef();
+  const { setCurrentPage } = useContext(CurrentPageContext);
 
   const scrollToMessageSection = () => {
     if (messageSectionRef.current) {
@@ -18,6 +20,7 @@ const Home = () => {
         behavior: 'smooth',
       });
     }
+    setCurrentPage('messagePage');
   };
 
   const scrollToContactSection = () => {
@@ -26,6 +29,7 @@ const Home = () => {
         behavior: 'smooth',
       });
     }
+    setCurrentPage('contactPage');
   };
 
   return (
