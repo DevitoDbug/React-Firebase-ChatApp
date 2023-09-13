@@ -34,10 +34,10 @@ const Home = () => {
     >
       <div className="h-full w-screen">
         <div className="relative flex h-full w-full overflow-x-hidden ">
-          <div className="w-2/6" ref={contactSectionRef}>
+          <div className="md:w-2/6" ref={contactSectionRef}>
             <ContactChats />
           </div>
-          <div className="w-4/6" ref={messageSectionRef}>
+          <div className="md:w-4/6" ref={messageSectionRef}>
             <MessageSection />
           </div>
         </div>
