@@ -1,11 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { LoginContext } from '../context/AuthContext';
 
 const Message = ({ data, message }) => {
   const { currentUser } = useContext(LoginContext);
-  console.log('current user ', currentUser);
+
+  const ref = useRef();
+
+  useEffect(() => {
+    ref.current.scrollIntoView({ behavior: 'smooth' });
+  }, [message]);
+
   return (
     <div
+      ref={ref}
       className={`sms ${
         currentUser.uid === message.senderId ? 'owner-sms' : ''
       }`}
