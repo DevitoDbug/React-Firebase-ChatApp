@@ -16,7 +16,14 @@ import { LoginContext } from '../context/AuthContext';
 import { ChatContext } from '../context/ChatContext';
 import { NavContext } from '../pages/Home';
 
-const Contact = ({ user, index, selected, setSelected }) => {
+const Contact = ({
+  user,
+  index,
+  selected,
+  setSelected,
+  lastMessage,
+  lastMessageDate,
+}) => {
   const [, setSearchPanelOpen] = useContext(SearchContext);
   const { currentUser } = useContext(LoginContext);
   const { dispatch } = useContext(ChatContext);
@@ -27,17 +34,17 @@ const Contact = ({ user, index, selected, setSelected }) => {
       ? 'rounded-xl bg-C_DarkBlue shadow-lg shadow-C_DarkBlueShadow'
       : 'border-b-2 border-C_BorderLightBlue';
 
+  const combinedId =
+    currentUser.uid > user.uid
+      ? currentUser.uid + user.uid
+      : user.uid + currentUser.uid;
+
   const handleSelect = async () => {
     setSearchPanelOpen(false);
     setSelected && setSelected(index);
 
     //setting chat context
     dispatch({ type: 'CHANGE_CHAT_RECIPIENT', payload: user });
-
-    const combinedId =
-      currentUser.uid > user.uid
-        ? currentUser.uid + user.uid
-        : user.uid + currentUser.uid;
 
     //Getting info about the currently loged in  user
     let currentUserDetails;
@@ -130,7 +137,7 @@ const Contact = ({ user, index, selected, setSelected }) => {
                 : 'text-C_TextBlack'
             }`}
           >
-            Thank you
+            {lastMessage.text}
           </span>
         </div>
       </div>
@@ -139,7 +146,8 @@ const Contact = ({ user, index, selected, setSelected }) => {
           index === selected ? 'text-C_TextWhite' : 'text-C_TextBlack'
         }`}
       >
-        12/45/2002
+        {lastMessageDate &&
+          lastMessageDate.toDate().toLocaleDateString('en-US')}
       </div>
     </div>
   );

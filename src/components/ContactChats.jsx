@@ -43,6 +43,8 @@ const ContactChats = () => {
               <Contact
                 key={user[0]}
                 user={user[1].userInfo}
+                lastMessage={user[1].lastMessage}
+                lastMessageDate={user[1].date}
                 index={index}
                 selected={selectedContact}
                 setSelected={setSelectedContact}

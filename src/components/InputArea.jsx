@@ -98,8 +98,6 @@ const InputArea = () => {
     ref.current.scrollIntoView({ behavior: 'smooth' });
   }, [text]);
 
-  console.log(data.userInfo.uid, currentUser.uid);
-
   return (
     <div>
       <div className=" absolute flex h-auto w-[95%] resize-y flex-row items-center justify-around gap-2 rounded-lg border-2 border-C_GreyBorder bg-C_WhiteBright  p-1">
