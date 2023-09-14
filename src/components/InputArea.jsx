@@ -4,7 +4,12 @@ import {
   faPaperclip,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useContext, useState } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import {
   doc,
   updateDoc,
@@ -27,6 +32,8 @@ const InputArea = () => {
 
   const [text, setText] = useState('');
   const [img, setImage] = useState(null);
+
+  const ref = useRef();
 
   const handleSend = async () => {
     if (img) {
@@ -71,18 +78,14 @@ const InputArea = () => {
     }
     setText('');
     setImage(null);
-    resetTextarea();
   };
 
-  const resetTextarea = () => {
-    // Reset the textarea's height to the original value (adjust this value as needed)
-    const originalHeight = '3rem'; // You can adjust this value based on your design
-    document.getElementById('expanding-textarea').style.height =
-      originalHeight;
-  };
+  useEffect(() => {
+    ref.current.scrollIntoView({ behavior: 'smooth' });
+  }, [text]);
 
   return (
-    <div className="">
+    <div>
       <div className=" absolute flex h-auto w-[95%] resize-y flex-row items-center justify-around gap-2 rounded-lg border-2 border-C_GreyBorder bg-C_WhiteBright  p-1">
         <div className="flex items-center justify-center gap-1">
           <input
@@ -105,18 +108,15 @@ const InputArea = () => {
           />
         </div>
         <textarea
+          ref={ref}
           id="expanding-textarea"
           style={{ height: '3rem' }}
           onChange={(e) => {
             setText(e.target.value);
           }}
-          rows="1"
-          className="h-auto max-h-14 w-[70%] resize-none justify-end outline-none"
+          rows="2"
+          className="h-auto w-[70%] resize-none justify-end outline-none"
           placeholder="Type new message..."
-          onInput={(e) => {
-            e.target.style.height = 'auto';
-            e.target.style.height = `${e.target.scrollHeight}px`;
-          }}
           type="text"
           value={text}
         />
