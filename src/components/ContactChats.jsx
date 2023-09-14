@@ -39,17 +39,19 @@ const ContactChats = () => {
       <div className="m-1 flex h-[86%] flex-col justify-between rounded-xl bg-C_LightBlue p-4 md:h-[89%] lg:h-[81%]">
         <div className="flex flex-col gap-3">
           {chats &&
-            Object.entries(chats).map((user, index) => (
-              <Contact
-                key={user[0]}
-                user={user[1].userInfo}
-                lastMessage={user[1].lastMessage}
-                lastMessageDate={user[1].date}
-                index={index}
-                selected={selectedContact}
-                setSelected={setSelectedContact}
-              />
-            ))}
+            Object.entries(chats)
+              ?.sort((a, b) => b[1].date - a[1].date)
+              .map((user, index) => (
+                <Contact
+                  key={user[0]}
+                  user={user[1].userInfo}
+                  lastMessage={user[1].lastMessage}
+                  lastMessageDate={user[1].date}
+                  index={index}
+                  selected={selectedContact}
+                  setSelected={setSelectedContact}
+                />
+              ))}
         </div>
         <div className="">
           <OptionsNavBar

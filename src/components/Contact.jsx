@@ -137,7 +137,7 @@ const Contact = ({
                 : 'text-C_TextBlack'
             }`}
           >
-            {lastMessage.text}
+            {lastMessage?.text}
           </span>
         </div>
       </div>
