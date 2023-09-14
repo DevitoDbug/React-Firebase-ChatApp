@@ -15,12 +15,12 @@ import {
   updateDoc,
   arrayUnion,
   Timestamp,
+  serverTimestamp,
 } from 'firebase/firestore';
 import { db, storage } from '../firebase';
 import { ChatContext } from '../context/ChatContext';
 import {
   getDownloadURL,
-  ref,
   uploadBytesResumable,
 } from 'firebase/storage';
 import { v4 as uuid } from 'uuid';
@@ -76,6 +76,20 @@ const InputArea = () => {
         }),
       });
     }
+
+    await updateDoc(doc(db, 'userChats', currentUser.uid), {
+      [data.combinedId + '.lastMessage']: {
+        text,
+      },
+      [data.combinedId + '.date']: serverTimestamp(),
+    });
+    await updateDoc(doc(db, 'userChats', data.userInfo.uid), {
+      [data.combinedId + '.lastMessage']: {
+        text,
+      },
+      [data.combinedId + '.date']: serverTimestamp(),
+    });
+
     setText('');
     setImage(null);
   };
@@ -83,6 +97,8 @@ const InputArea = () => {
   useEffect(() => {
     ref.current.scrollIntoView({ behavior: 'smooth' });
   }, [text]);
+
+  console.log(data.userInfo.uid, currentUser.uid);
 
   return (
     <div>
