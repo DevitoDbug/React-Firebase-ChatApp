@@ -9,11 +9,13 @@ import React from 'react';
 import { useContext } from 'react';
 import { SearchContext } from '../context/SearchContext';
 import { CurrentPageContext } from '../context/CurrentPageContex';
+import { NavContext } from '../pages/Home';
 
-const OptionsNavBar = ({ scrollToMessageSection }) => {
+const OptionsNavBar = () => {
   const { currentPage, setCurrentPage } = useContext(
     CurrentPageContext,
   );
+  const { scrollToMessageSection } = useContext(NavContext);
   const [, setSearchOpen] = useContext(SearchContext);
   const handleOpenSearch = () => {
     setSearchOpen(true);

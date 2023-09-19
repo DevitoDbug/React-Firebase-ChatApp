@@ -21,6 +21,7 @@ import { db, storage } from '../firebase';
 import { ChatContext } from '../context/ChatContext';
 import {
   getDownloadURL,
+  ref,
   uploadBytesResumable,
 } from 'firebase/storage';
 import { v4 as uuid } from 'uuid';
@@ -33,7 +34,7 @@ const InputArea = () => {
   const [text, setText] = useState('');
   const [img, setImage] = useState(null);
 
-  const ref = useRef();
+  const scrollRef = useRef();
 
   const handleSend = async () => {
     if (img) {
@@ -95,7 +96,7 @@ const InputArea = () => {
   };
 
   useEffect(() => {
-    ref.current.scrollIntoView({ behavior: 'smooth' });
+    scrollRef.current.scrollIntoView({ behavior: 'smooth' });
   }, [text]);
 
   return (
@@ -122,7 +123,7 @@ const InputArea = () => {
           />
         </div>
         <textarea
-          ref={ref}
+          ref={scrollRef}
           id="expanding-textarea"
           style={{ height: '3rem' }}
           onChange={(e) => {
