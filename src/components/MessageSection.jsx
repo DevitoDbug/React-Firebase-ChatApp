@@ -31,7 +31,7 @@ const MessageSection = () => {
     <div className="relative h-screen w-screen flex-shrink-0 p-2 md:w-full ">
       <button
         className="absolute h-9 w-9 rounded-full bg-C_DarkBlue text-lg text-C_TextWhiteDull md:hidden"
-        onClick={() => scrollToContactSection()}
+        onClick={scrollToContactSection}
       >
         <FontAwesomeIcon icon={faArrowLeft} />
       </button>

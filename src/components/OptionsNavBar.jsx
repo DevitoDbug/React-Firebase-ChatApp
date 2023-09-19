@@ -41,11 +41,10 @@ const OptionsNavBar = () => {
       </div>
 
       <div className="ml-2 flex flex-col items-center justify-center">
-        <button>
+        <button onClick={scrollToMessageSection}>
           <FontAwesomeIcon
             icon={faMessage}
             className=" text-xl text-C_UserDullBlack"
-            onClick={scrollToMessageSection}
           />
         </button>
         <div
