@@ -45,9 +45,7 @@ const OptionsNavBar = () => {
           <FontAwesomeIcon
             icon={faMessage}
             className=" text-xl text-C_UserDullBlack"
-            onClick={() => {
-              scrollToMessageSection();
-            }}
+            onClick={scrollToMessageSection}
           />
         </button>
         <div
