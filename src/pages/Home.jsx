@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import ContactChats from '../components/ContactChats';
 import MessageSection from '../components/MessageSection';
 import Search from '../components/Search';
@@ -10,40 +10,34 @@ export const NavContext = createContext();
 
 const Home = () => {
   const [searchOpen] = useContext(SearchContext);
-  const messageSectionRef = useRef();
-  const contactSectionRef = useRef();
-  const { setCurrentPage } = useContext(CurrentPageContext);
+  const { homePage, setHomePage } = useContext(CurrentPageContext);
 
   const scrollToMessageSection = () => {
-    if (messageSectionRef.current) {
-      messageSectionRef.current.scrollIntoView({
-        behavior: 'smooth',
-      });
-    }
-    setCurrentPage('messagePage');
+    setHomePage(false);
   };
 
   const scrollToContactSection = () => {
-    if (contactSectionRef.current) {
-      contactSectionRef.current.scrollIntoView({
-        behavior: 'smooth',
-      });
-    }
-    setCurrentPage('contactPage');
+    console.log('Scroll to contact section ');
+    setHomePage(true);
   };
 
   return (
     <NavContext.Provider
       value={{ scrollToMessageSection, scrollToContactSection }}
     >
-      <div className="h-full w-screen">
-        <div className="relative flex h-full w-full overflow-x-hidden ">
-          <div className="md:w-2/6" ref={contactSectionRef}>
-            <ContactChats />
-          </div>
-          <div className="md:w-4/6" ref={messageSectionRef}>
-            <MessageSection />
-          </div>
+      <div className="h-screen w-[400vw]">
+        <div className="relative flex h-screen w-full flex-row overflow-x-hidden">
+          {homePage && (
+            <div className="h-screen w-screen md:w-2/6">
+              <ContactChats />
+            </div>
+          )}
+
+          {!homePage && (
+            <div className="h-screen w-screen md:w-4/6 ">
+              <MessageSection />
+            </div>
+          )}
         </div>
         {searchOpen && <Search />}
       </div>

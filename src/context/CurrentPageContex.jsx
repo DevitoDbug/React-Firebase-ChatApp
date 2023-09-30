@@ -4,11 +4,9 @@ import React from 'react';
 export const CurrentPageContext = createContext();
 
 const CurrentPageContexProvider = ({ children }) => {
-  const [currentPage, setCurrentPage] = useState('');
+  const [homePage, setHomePage] = useState(false);
   return (
-    <CurrentPageContext.Provider
-      value={{ currentPage, setCurrentPage }}
-    >
+    <CurrentPageContext.Provider value={{ homePage, setHomePage }}>
       {children}
     </CurrentPageContext.Provider>
   );
