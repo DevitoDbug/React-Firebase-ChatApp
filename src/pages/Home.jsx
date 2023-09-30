@@ -17,7 +17,6 @@ const Home = () => {
   };
 
   const scrollToContactSection = () => {
-    console.log('Scroll to contact section ');
     setHomePage(true);
   };
 
