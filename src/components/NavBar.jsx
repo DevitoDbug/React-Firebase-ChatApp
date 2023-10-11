@@ -43,7 +43,7 @@ const NavBar = () => {
           </h2>
           <button
             onClick={handleSignOut}
-            className="flex w-[80%] items-center justify-between rounded-3xl bg-C_DarkBlue px-2 py-1 text-sm font-thin text-C_TextWhite md:p-2 "
+            className="flex w-[90%] items-center justify-between rounded-3xl bg-C_DarkBlue px-2 py-1 text-sm font-thin text-C_TextWhite md:p-2 "
           >
             <span className="">log Out</span>
             <FontAwesomeIcon
