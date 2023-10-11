@@ -14,10 +14,11 @@ import CurrentPageContexProvider from './context/CurrentPageContex';
 
 const App = () => {
   const currentUser = useContext(LoginContext);
-
   const ProtectedRoute = ({ children }) => {
-    if (!currentUser) {
+    if (!currentUser.currentUser) {
       return <Navigate to="/login" />;
+    }else{
+      return children;
     }
   };
   return (
