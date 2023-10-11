@@ -24,8 +24,8 @@ const Home = () => {
     <NavContext.Provider
       value={{ scrollToMessageSection, scrollToContactSection }}
     >
-      <div className="mb-1 mt-1 h-[99vh] w-screen">
-        <div className="relative flex h-[100%] w-[100%] flex-row  overflow-x-hidden">
+      <div className="mb-1 mt-1 h-screen w-screen">
+        <div className="relative flex h-screen w-screen flex-row  overflow-x-hidden">
           <div
             className={`${
               homePage ? 'md:block' : 'hidden'
