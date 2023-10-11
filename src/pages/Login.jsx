@@ -23,6 +23,20 @@ const Login = () => {
       console.log(error);
     }
   };
+
+  const handleDemoLogin = async () => {
+    setIsTyping(false);
+    const email = 'user33@gmail.com';
+    const password = 'user33';
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate('/');
+    } catch (e) {
+      setEror(e.message);
+      console.log(error);
+    }
+  };
   return (
     <form
       onSubmit={handleSubmit}
@@ -53,7 +67,16 @@ const Login = () => {
           Either password or email is wrong
         </span>
       )}
-
+      <div className="text-sm">
+        {'Demo login? '}
+        {/* className="ml-1  text-sm font-bold text-C_DarkBlue" */}
+        <button
+          className="ml-1  text-sm font-bold text-C_DarkBlue"
+          onClick={handleDemoLogin}
+        >
+          Demo
+        </button>
+      </div>
       <div className="text-sm">
         You don't have an account?
         <Link
