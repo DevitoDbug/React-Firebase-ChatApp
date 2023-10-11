@@ -20,7 +20,6 @@ const App = () => {
       return <Navigate to="/login" />;
     }
   };
-
   return (
     <CurrentPageContexProvider>
       <div className=" flex h-screen w-screen items-center justify-center">
