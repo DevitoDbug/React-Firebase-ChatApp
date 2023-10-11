@@ -1,13 +1,13 @@
 # React Chat App
 
 A real-time chat application built with React.js, Firebase, and Tailwind CSS.
+**[Demo](https://artlife-chat.vercel.app/)**
 
 ## Screenshots
 
 ![App Screenshots](https://github.com/DevitoDbug/React-Firebase-ChatApp/blob/master/public/screenShot1.jpg?raw=true)
 ![App Screenshots](https://github.com/DevitoDbug/React-Firebase-ChatApp/blob/master/public/screenShot2.jpg?raw=true)
 ![App Screenshots](https://github.com/DevitoDbug/React-Firebase-ChatApp/blob/master/public/screenShot3.jpg?raw=true)
-
 
 ## Features
 
@@ -42,5 +42,3 @@ npm run dev
 
 # Open in Browser (http://localhost:3000)
 ```
-
-
