@@ -17,9 +17,8 @@ const App = () => {
   const ProtectedRoute = ({ children }) => {
     if (!currentUser.currentUser) {
       return <Navigate to="/login" />;
-    }else{
-      return children;
     }
+    return children;
   };
   return (
     <CurrentPageContexProvider>
