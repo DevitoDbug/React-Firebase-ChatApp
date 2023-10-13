@@ -18,9 +18,9 @@ const Login = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       navigate('/');
+      setEror('');
     } catch (e) {
       setEror(e.message);
-      console.log(error);
     }
   };
 
@@ -32,11 +32,12 @@ const Login = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       navigate('/');
+      setEror('');
     } catch (e) {
       setEror(e.message);
-      console.log(error);
     }
   };
+
   return (
     <form
       onSubmit={handleSubmit}
