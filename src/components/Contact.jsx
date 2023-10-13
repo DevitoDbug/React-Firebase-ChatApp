@@ -18,21 +18,19 @@ import { NavContext } from '../pages/Home';
 
 const Contact = ({
   user,
-  index,
-  selected,
-  setSelected,
+  isSelected,
   lastMessage,
   lastMessageDate,
+  onClick,
 }) => {
   const [, setSearchPanelOpen] = useContext(SearchContext);
   const { currentUser } = useContext(LoginContext);
   const { dispatch } = useContext(ChatContext);
   const { scrollToMessageSection } = useContext(NavContext);
 
-  const darkBg =
-    index === selected
-      ? 'rounded-xl bg-C_DarkBlue shadow-lg shadow-C_DarkBlueShadow'
-      : 'border-b-2 border-C_BorderLightBlue';
+  const darkBg = isSelected
+    ? 'rounded-xl bg-C_DarkBlue shadow-lg shadow-C_DarkBlueShadow'
+    : 'border-b-2 border-C_BorderLightBlue';
 
   const combinedId =
     currentUser.uid > user.uid
@@ -40,8 +38,8 @@ const Contact = ({
       : user.uid + currentUser.uid;
 
   const handleSelect = async () => {
+    onClick();
     setSearchPanelOpen(false);
-    setSelected && setSelected(index);
 
     //setting chat context
     dispatch({ type: 'CHANGE_CHAT_RECIPIENT', payload: user });
@@ -117,24 +115,20 @@ const Contact = ({
           src={user.photoURL}
           alt=""
           className={`rounded-full border-2 border-C_Gold object-cover ${
-            index === selected ? 'h-14 w-14 ' : 'h-12 w-12 '
+            isSelected ? 'h-14 w-14 ' : 'h-12 w-12 '
           } `}
         />
         <div className="flex flex-col justify-center">
           <span
             className={`text-xs font-semibold ${
-              index === selected
-                ? 'text-C_TextWhite'
-                : 'text-C_TextBlack'
+              isSelected ? 'text-C_TextWhite' : 'text-C_TextBlack'
             }`}
           >
             {user.firstName}
           </span>
           <span
             className={`text-[0.625rem] font-light  ${
-              index === selected
-                ? 'text-C_TextWhiteDull'
-                : 'text-C_TextBlack'
+              isSelected ? 'text-C_TextWhiteDull' : 'text-C_TextBlack'
             }`}
           >
             {lastMessage?.text}
@@ -143,7 +137,7 @@ const Contact = ({
       </div>
       <div
         className={`text-[0.625rem] font-normal ${
-          index === selected ? 'text-C_TextWhite' : 'text-C_TextBlack'
+          isSelected ? 'text-C_TextWhite' : 'text-C_TextBlack'
         }`}
       >
         {lastMessageDate &&

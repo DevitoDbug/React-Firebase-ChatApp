@@ -10,7 +10,11 @@ const ContactChats = () => {
   const [chats, setChats] = useState([]);
   const { currentUser } = useContext(LoginContext);
 
-  const [selectedContact, setSelectedContact] = useState(null);
+  const [isSelected, setIsSelected] = useState(null);
+
+  const handleContactClick = (id) => {
+    setIsSelected(id);
+  };
 
   //fetches chats everytime user changes
   useEffect(() => {
@@ -39,15 +43,14 @@ const ContactChats = () => {
           {chats &&
             Object.entries(chats)
               ?.sort((a, b) => b[1].date - a[1].date)
-              .map((user, index) => (
+              .map((user) => (
                 <Contact
                   key={user[0]}
                   user={user[1].userInfo}
                   lastMessage={user[1].lastMessage}
                   lastMessageDate={user[1].date}
-                  index={index}
-                  selected={selectedContact}
-                  setSelected={setSelectedContact}
+                  isSelected={isSelected === user[0]}
+                  onClick={() => handleContactClick(user[0])}
                 />
               ))}
         </div>
