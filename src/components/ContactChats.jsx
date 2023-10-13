@@ -10,10 +10,10 @@ const ContactChats = () => {
   const [chats, setChats] = useState([]);
   const { currentUser } = useContext(LoginContext);
 
-  const [isSelected, setIsSelected] = useState(null);
+  const [isActive, setIsActive] = useState(null);
 
   const handleContactClick = (id) => {
-    setIsSelected(id);
+    setIsActive(id);
   };
 
   //fetches chats everytime user changes
@@ -49,7 +49,7 @@ const ContactChats = () => {
                   user={user[1].userInfo}
                   lastMessage={user[1].lastMessage}
                   lastMessageDate={user[1].date}
-                  isSelected={isSelected === user[0]}
+                  isSelected={isActive === user[0]}
                   onClick={() => handleContactClick(user[0])}
                 />
               ))}
