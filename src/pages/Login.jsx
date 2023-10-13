@@ -24,20 +24,21 @@ const Login = () => {
     }
   };
 
-  const handleDemoLogin = async () => {
+  const handleDemoLogin = async (e) => {
+    e.preventDefault();
     setIsTyping(false);
     const email = 'user33@gmail.com';
     const password = 'user33';
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate('/');
       setEror('');
+      navigate('/');
     } catch (e) {
-      setEror(e.message);
+      setEror(e);
+      console.log(e);
     }
   };
-
   return (
     <form
       onSubmit={handleSubmit}
