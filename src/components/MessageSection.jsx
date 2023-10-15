@@ -19,7 +19,7 @@ const MessageSection = () => {
     let cachedMessage = null;
     let messageDate = null;
     return function seenMessage(message) {
-      if (message != cachedMessage || message.date != messageDate) {
+      if (message !== cachedMessage || message.date !== messageDate) {
         cachedMessage = message;
         messageDate = message.date;
         return false;
@@ -28,6 +28,8 @@ const MessageSection = () => {
       }
     };
   };
+
+  const cachedMessagesFunction = isSMSFromSamePersonAndSameDate();
 
   useEffect(() => {
     const unSub = onSnapshot(
@@ -57,9 +59,7 @@ const MessageSection = () => {
               key={message?.id}
               message={message}
               data={data.userInfo}
-              isSMSFromSamePersonAndSameDate={
-                isSMSFromSamePersonAndSameDate
-              }
+              isSMSFromSamePersonAndSameDate={cachedMessagesFunction}
             />
           ))}
       </div>

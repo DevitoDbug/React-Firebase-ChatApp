@@ -1,10 +1,16 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { LoginContext } from '../context/AuthContext';
 
-const Message = ({ data, message }) => {
+const Message = ({
+  data,
+  message,
+  isSMSFromSamePersonAndSameDate,
+}) => {
   const { currentUser } = useContext(LoginContext);
 
   const ref = useRef();
+  const isMessageCached = isSMSFromSamePersonAndSameDate(message);
+  console.log(isMessageCached);
 
   useEffect(() => {
     ref.current.scrollIntoView({ behavior: 'smooth' });
@@ -17,11 +23,13 @@ const Message = ({ data, message }) => {
         currentUser.uid === message.senderId ? 'owner-sms' : ''
       }`}
     >
-      <span className="sms-user-name">
-        {currentUser.uid === message.senderId
-          ? currentUser.displayName
-          : data?.firstName}
-      </span>
+      {!isMessageCached && (
+        <span className="sms-user-name ">
+          {currentUser.uid === message.senderId
+            ? currentUser.displayName
+            : data?.firstName}
+        </span>
+      )}
       <div className="sms-info">
         <img
           src={
