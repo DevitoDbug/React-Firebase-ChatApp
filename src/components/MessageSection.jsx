@@ -14,6 +14,21 @@ const MessageSection = () => {
   const [messages, setMessages] = useState([]);
   const { scrollToContactSection } = useContext(NavContext);
 
+  //We need to display messages as a banch if they are from the same person and in the same day
+  const isSMSFromSamePersonAndSameDate = () => {
+    let cachedMessage = null;
+    let messageDate = null;
+    return function seenMessage(message) {
+      if (message != cachedMessage || message.date != messageDate) {
+        cachedMessage = message;
+        messageDate = message.date;
+        return false;
+      } else {
+        return true;
+      }
+    };
+  };
+
   useEffect(() => {
     const unSub = onSnapshot(
       doc(db, 'chats', data.combinedId),
@@ -42,6 +57,9 @@ const MessageSection = () => {
               key={message?.id}
               message={message}
               data={data.userInfo}
+              isSMSFromSamePersonAndSameDate={
+                isSMSFromSamePersonAndSameDate
+              }
             />
           ))}
       </div>
