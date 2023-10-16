@@ -15,7 +15,7 @@ const Message = ({ data, message, displayMetaData }) => {
       ref={ref}
       className={`sms ${
         currentUser.uid === message.senderId ? 'owner-sms' : ''
-      }`}
+      } ${displayMetaData ? 'pt-2' : 'pt-1'}`}
     >
       {displayMetaData && (
         <span className="sms-user-name ">
