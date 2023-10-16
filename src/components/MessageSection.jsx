@@ -13,23 +13,7 @@ const MessageSection = () => {
   const { data } = useContext(ChatContext);
   const [messages, setMessages] = useState([]);
   const { scrollToContactSection } = useContext(NavContext);
-
-  //We need to display messages as a banch if they are from the same person and in the same day
-  const isSMSFromSamePersonAndSameDate = () => {
-    let cachedMessage = null;
-    let messageDate = null;
-    return function seenMessage(message) {
-      if (message !== cachedMessage || message.date !== messageDate) {
-        cachedMessage = message;
-        messageDate = message.date;
-        return false;
-      } else {
-        return true;
-      }
-    };
-  };
-
-  const cachedMessagesFunction = isSMSFromSamePersonAndSameDate();
+  let lastSender = '';
 
   useEffect(() => {
     const unSub = onSnapshot(
@@ -54,16 +38,25 @@ const MessageSection = () => {
       </button>
       <div className="h-[93%] overflow-y-scroll sm:h-[85vh] md:h-[93vh] lg:h-[85vh]">
         {messages &&
-          messages.map((message) => (
-            <Message
-              key={message?.id}
-              message={message}
-              data={data.userInfo}
-              isSMSFromSamePersonAndSameDate={cachedMessagesFunction}
-            />
-          ))}
+          messages.map((message) => {
+            const isSameSender = message.senderId === lastSender;
+
+            // Only update lastSender if the sender is different
+            if (!isSameSender) {
+              lastSender = message.senderId;
+            }
+
+            return (
+              <Message
+                key={message?.id}
+                message={message}
+                data={data.userInfo}
+                displayMetaData={!isSameSender}
+              />
+            );
+          })}
       </div>
-      <div className="h-[5%] sm:h-[15vh]  md:h-[7vh]  lg:h-[15vh]">
+      <div className="h-[5%] sm:h-[15vh] md:h-[7vh] lg:h-[15vh]">
         <InputArea />
       </div>
     </div>

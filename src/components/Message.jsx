@@ -1,16 +1,11 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { LoginContext } from '../context/AuthContext';
 
-const Message = ({
-  data,
-  message,
-  isSMSFromSamePersonAndSameDate,
-}) => {
+const Message = ({ data, message, displayMetaData }) => {
   const { currentUser } = useContext(LoginContext);
+  console.log(displayMetaData);
 
   const ref = useRef();
-  const isMessageCached = isSMSFromSamePersonAndSameDate(message);
-  console.log(isMessageCached);
 
   useEffect(() => {
     ref.current.scrollIntoView({ behavior: 'smooth' });
@@ -23,7 +18,7 @@ const Message = ({
         currentUser.uid === message.senderId ? 'owner-sms' : ''
       }`}
     >
-      {!isMessageCached && (
+      {displayMetaData && (
         <span className="sms-user-name ">
           {currentUser.uid === message.senderId
             ? currentUser.displayName
