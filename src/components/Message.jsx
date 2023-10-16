@@ -15,7 +15,7 @@ const Message = ({ data, message, displayMetaData }) => {
       ref={ref}
       className={`sms ${
         currentUser.uid === message.senderId ? 'owner-sms' : ''
-      } ${displayMetaData ? 'pt-2' : 'pt-1'}`}
+      } ${displayMetaData ? ' pt-5' : 'pt-[2px]'}`}
     >
       {displayMetaData && (
         <span className="sms-user-name ">
@@ -24,6 +24,7 @@ const Message = ({ data, message, displayMetaData }) => {
             : data?.firstName}
         </span>
       )}
+
       <div className="sms-info">
         {displayMetaData ? (
           <img
@@ -40,7 +41,17 @@ const Message = ({ data, message, displayMetaData }) => {
         )}
         <div className="sms-content">
           {message.text && (
-            <div className="sms-content-text">
+            <div
+              className={`sms-content-text ${
+                displayMetaData
+                  ? `${
+                      currentUser.uid === message.senderId
+                        ? 'rounded-bl-xl rounded-br-xl rounded-tl-xl rounded-tr-none'
+                        : 'rounded-bl-xl rounded-br-xl rounded-tl-none rounded-tr-xl'
+                    }   `
+                  : 'rounded-xl'
+              }`}
+            >
               {message.text}
               <span>
                 {message.date.toDate().toLocaleDateString('en-US')}

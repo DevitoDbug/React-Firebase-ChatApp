@@ -20,7 +20,6 @@
         font-weight: 400;
         background-color: #e3f6fc;
         padding: 1rem;
-        border-radius: 0px 14px 14px 14px;
         display: flex;
         flex-direction: column;
         span {
@@ -46,7 +45,6 @@
       gap: 0.5rem;
       align-items: flex-end;
       .sms-content-text {
-        border-radius: 14px 0px 14px 14px;
         background-color: #f3ba4a;
         color: #fdfdfe;
         span {
