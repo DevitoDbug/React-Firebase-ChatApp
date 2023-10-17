@@ -37,8 +37,9 @@ const Contact = ({
       ? currentUser.uid + user.uid
       : user.uid + currentUser.uid;
 
+  console.log(onClick);
+
   const handleSelect = async () => {
-    onClick();
     setSearchPanelOpen(false);
 
     //setting chat context
@@ -107,7 +108,10 @@ const Contact = ({
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
-      onClick={handleSelect}
+      onClick={() => {
+        handleSelect();
+        onClick();
+      }}
       className={`flex h-20 w-full flex-row items-center justify-between p-2 ${darkBg} `}
     >
       <div className="flex flex-row gap-2">

@@ -78,15 +78,19 @@ const Register = () => {
 
               try {
                 await setDoc(doc(db, 'userChats', res.user.uid), {});
+
+                // Navigate to the home page after creating the user chat
+                navigate('/');
               } catch (e) {
-                console.log(e);
+                console.log(
+                  'Adding user chat to firestore error:\n',
+                  e,
+                );
               }
             },
           );
         },
       );
-
-      navigate('/');
     } catch (e) {
       setError(e);
     }
