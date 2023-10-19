@@ -16,10 +16,16 @@ const Search = () => {
   const [, setSearchOpen] = useContext(SearchContext);
   const [searchedUserName, setSearchedUserName] = useState('');
   const [searchResult, setSearchResult] = useState({});
+  const [isActive, setIsActive] = useState(null);
+  console.log(searchResult);
 
   const handleCloseSearch = () => {
     setSearchOpen(false);
     setSearchResult({});
+  };
+
+  const handleContactClick = (id) => {
+    setIsActive(id);
   };
 
   const handleSelectByEnterKey = (event) => {
@@ -76,7 +82,11 @@ const Search = () => {
         <span className="mt-7">No matching results {':)'}</span>
       ) : (
         <div className="w-full overflow-y-scroll px-1 py-4">
-          <Contact user={searchResult} />
+          <Contact
+            user={searchResult}
+            isSelected={isActive === searchResult.uid}
+            onClick={() => handleContactClick(searchResult.uid)}
+          />
         </div>
       )}
     </div>
