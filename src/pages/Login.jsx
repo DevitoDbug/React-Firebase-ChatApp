@@ -27,8 +27,8 @@ const Login = () => {
   const handleDemoLogin = async (e) => {
     e.preventDefault();
     setIsTyping(false);
-    const email = 'candymegan@gmail.com';
-    const password = 'candymeg';
+    const email = 'emilysofia@gmail.com';
+    const password = 'emilysofia';
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
