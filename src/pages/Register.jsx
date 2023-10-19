@@ -70,16 +70,13 @@ const Register = () => {
                   photoURL: downloadURL,
                 });
               } catch (e) {
-                console.log(
-                  'Adding user to user collection error:\n',
-                  e,
-                );
+                console.log(e);
               }
 
               try {
                 await setDoc(doc(db, 'userChats', res.user.uid), {});
 
-                // Navigate to the home page after creating the user chat
+                // Navigate to the home page after creating the userChat document
                 navigate('/');
               } catch (e) {
                 console.log(

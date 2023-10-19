@@ -37,8 +37,6 @@ const Contact = ({
       ? currentUser.uid + user.uid
       : user.uid + currentUser.uid;
 
-  console.log(onClick);
-
   const handleSelect = async () => {
     setSearchPanelOpen(false);
 
@@ -109,6 +107,7 @@ const Contact = ({
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
       onClick={() => {
+        console.log(onClick);
         handleSelect();
         onClick();
       }}
