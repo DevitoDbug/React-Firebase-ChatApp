@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faClose } from '@fortawesome/free-solid-svg-icons';
 import { useContext } from 'react';
@@ -11,13 +11,15 @@ import {
   getDocs,
 } from 'firebase/firestore';
 import { db } from '../firebase';
+import { LoginContext } from '../context/AuthContext';
 
 const Search = () => {
+  const { currentUser } = useContext(LoginContext);
   const [, setSearchOpen] = useContext(SearchContext);
   const [searchedUserName, setSearchedUserName] = useState('');
   const [searchResult, setSearchResult] = useState({});
   const [isActive, setIsActive] = useState(null);
-  console.log(searchResult);
+  const [allContacts, setAllContacts] = useState([]); // [ {uid: , userInfo: {firstName: , lastName: , email: , photoURL: }}, ...
 
   const handleCloseSearch = () => {
     setSearchOpen(false);
@@ -50,6 +52,28 @@ const Search = () => {
       console.log('Fetching data from firestore error: ', e);
     }
   };
+
+  const handleGetAllContacts = async () => {
+    const q = query(collection(db, 'users'));
+    setAllContacts([]);
+    try {
+      //Searching for a user from firebase
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        setAllContacts((prevState) => [
+          ...prevState,
+          { uid: doc.id, userInfo: doc.data() },
+        ]);
+      });
+    } catch (e) {
+      console.log('Fetching data from firestore error: ', e);
+    }
+  };
+
+  useEffect(() => {
+    handleGetAllContacts();
+  }, []);
+  console.log('allContacts: ', allContacts);
   return (
     <div className="absolute left-[10%] top-[10%] flex h-[30%] w-[80%] flex-col items-center rounded-lg bg-[#bae9f8] px-1 py-2 shadow-lg md:left-[30%] md:w-[50%] lg:left-[30%] lg:top-[20%] lg:w-[40%] ">
       <button
@@ -79,7 +103,9 @@ const Search = () => {
         </button>
       </div>
       {Object.keys(searchResult).length == 0 ? (
-        <span className="mt-7">No matching results {':)'}</span>
+        <span className="mb-7 mt-7">
+          No matching results from search{':)'}
+        </span>
       ) : (
         <div className="w-full overflow-y-scroll px-1 py-4">
           <Contact
@@ -89,6 +115,19 @@ const Search = () => {
           />
         </div>
       )}
+      <div className=" w-full overflow-scroll border-t-2 border-gray-300 bg-[#bae9f8f5]">
+        {allContacts.map(
+          (contact) =>
+            contact.uid !== currentUser.uid && (
+              <Contact
+                key={contact.uid}
+                user={contact.userInfo}
+                isSelected={isActive === contact.uid}
+                onClick={() => handleContactClick(contact.uid)}
+              />
+            ),
+        )}
+      </div>
     </div>
   );
 };
