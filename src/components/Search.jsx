@@ -73,7 +73,6 @@ const Search = () => {
   useEffect(() => {
     handleGetAllContacts();
   }, []);
-  console.log('allContacts: ', allContacts);
   return (
     <div className="absolute left-[10%] top-[10%] flex h-[30%] w-[80%] flex-col items-center rounded-lg bg-[#bae9f8] px-1 py-2 shadow-lg md:left-[30%] md:w-[50%] lg:left-[30%] lg:top-[20%] lg:w-[40%] ">
       <button
