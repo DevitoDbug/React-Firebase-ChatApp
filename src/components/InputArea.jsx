@@ -4,12 +4,7 @@ import {
   faPaperclip,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, {
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import {
   doc,
   updateDoc,
@@ -19,11 +14,7 @@ import {
 } from 'firebase/firestore';
 import { db, storage } from '../firebase';
 import { ChatContext } from '../context/ChatContext';
-import {
-  getDownloadURL,
-  ref,
-  uploadBytesResumable,
-} from 'firebase/storage';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { v4 as uuid } from 'uuid';
 import { LoginContext } from '../context/AuthContext';
 
@@ -42,29 +33,24 @@ const InputArea = () => {
       const uploadTask = uploadBytesResumable(storageRef, img);
       uploadTask.on(
         (error) => {
-          console.log(
-            'There  was a failure on the upload\n ERROR: ',
-            error,
-          );
+          console.log('There  was a failure on the upload\n ERROR: ', error);
         },
         () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(
-            async (downloadURL) => {
-              try {
-                await updateDoc(doc(db, 'chats', data.combinedId), {
-                  messages: arrayUnion({
-                    id: uuid(),
-                    text,
-                    imageURL: downloadURL,
-                    senderId: currentUser.uid,
-                    date: Timestamp.now(),
-                  }),
-                });
-              } catch (e) {
-                console.log(e);
-              }
-            },
-          );
+          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            try {
+              await updateDoc(doc(db, 'chats', data.combinedId), {
+                messages: arrayUnion({
+                  id: uuid(),
+                  text,
+                  imageURL: downloadURL,
+                  senderId: currentUser.uid,
+                  date: Timestamp.now(),
+                }),
+              });
+            } catch (e) {
+              console.log(e);
+            }
+          });
         },
       );
     } else {
