@@ -42,11 +42,9 @@ const Login = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex h-full w-full flex-col items-center  justify-center gap-3 bg-C_LightBlue text-lg md:h-[40%] md:w-[60%] md:gap-3 md:rounded-xl md:shadow-xl lg:h-[60%] lg:w-[30%]"
+      className="flex h-[--webkit-fill-available] w-full flex-col items-center  justify-center gap-3 bg-C_LightBlue text-lg md:h-[40%] md:w-[60%] md:gap-3 md:rounded-xl md:shadow-xl lg:h-[60%] lg:w-[30%]"
     >
-      <h2 className="text-xl text-C_TextBlack md:text-2xl lg:text-lg">
-        Login
-      </h2>
+      <h2 className="text-xl text-C_TextBlack md:text-2xl lg:text-lg">Login</h2>
       <input
         onChange={() => setIsTyping(true)}
         className="w-[70%] rounded-md p-3 outline-C_DarkBlue md:w-[80%] md:text-2xl lg:p-2 lg:text-lg"
