@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import NavBar from './NavBar';
 import OptionsNavBar from './OptionsNavBar';
 import { doc, onSnapshot } from 'firebase/firestore';
@@ -11,8 +11,6 @@ const ContactChats = () => {
   const { currentUser } = useContext(LoginContext);
 
   const [isActive, setIsActive] = useState(null);
-
-  const scrollRef = useRef();
 
   const handleContactClick = (id) => {
     setIsActive(id);
@@ -31,11 +29,6 @@ const ContactChats = () => {
 
     currentUser?.uid && getChats();
   }, [currentUser?.uid]);
-
-  //scrolls to bottom of chat
-  useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [isActive]);
 
   return (
     <aside className=" h-full w-[full]  md:w-full">
@@ -58,7 +51,7 @@ const ContactChats = () => {
                 />
               ))}
         </div>
-        <div ref={scrollRef}>
+        <div>
           <OptionsNavBar />
         </div>
       </div>

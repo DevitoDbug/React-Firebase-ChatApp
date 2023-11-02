@@ -4,7 +4,7 @@ import {
   faPaperclip,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   doc,
   updateDoc,
@@ -24,8 +24,6 @@ const InputArea = () => {
 
   const [text, setText] = useState('');
   const [img, setImage] = useState(null);
-
-  const scrollRef = useRef();
 
   const handleSend = async () => {
     if (img) {
@@ -81,10 +79,6 @@ const InputArea = () => {
     setImage(null);
   };
 
-  useEffect(() => {
-    scrollRef.current.scrollIntoView({ behavior: 'smooth' });
-  }, [text]);
-
   return (
     <div>
       <div className=" absolute flex h-auto w-[95%] resize-y flex-row items-center justify-around gap-2 rounded-lg border-2 border-C_GreyBorder bg-C_WhiteBright  p-1">
@@ -109,7 +103,6 @@ const InputArea = () => {
           />
         </div>
         <textarea
-          ref={scrollRef}
           id="expanding-textarea"
           style={{ height: '3rem' }}
           onChange={(e) => {
