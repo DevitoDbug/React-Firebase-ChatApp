@@ -29,7 +29,7 @@ const Home = () => {
           <div
             className={`${
               homePage ? 'md:block' : 'hidden'
-            } h-[100vh] w-full md:block md:w-2/6`}
+            } h-[100svh] w-full md:block md:w-2/6`}
           >
             <ContactChats />
           </div>
