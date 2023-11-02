@@ -16,12 +16,9 @@ const MessageSection = () => {
   let lastSender = '';
 
   useEffect(() => {
-    const unSub = onSnapshot(
-      doc(db, 'chats', data.combinedId),
-      (doc) => {
-        doc.exists() && setMessages(doc.data().messages);
-      },
-    );
+    const unSub = onSnapshot(doc(db, 'chats', data.combinedId), (doc) => {
+      doc.exists() && setMessages(doc.data().messages);
+    });
     return () => {
       unSub();
       setMessages([]);
@@ -36,7 +33,7 @@ const MessageSection = () => {
       >
         <FontAwesomeIcon icon={faArrowLeft} />
       </button>
-      <div className="h-[93%] overflow-y-scroll sm:h-[85vh] md:h-[93vh] lg:h-[85vh]">
+      <div className="h-[90%] overflow-y-scroll sm:h-[85vh] md:h-[93vh] lg:h-[85vh]">
         {messages &&
           messages.map((message) => {
             const isSameSender = message.senderId === lastSender;
@@ -56,7 +53,7 @@ const MessageSection = () => {
             );
           })}
       </div>
-      <div className="h-[5%] sm:h-[15vh] md:h-[7vh] lg:h-[15vh]">
+      <div className="h-[10%] sm:h-[15vh] md:h-[7vh] lg:h-[15vh]">
         <InputArea />
       </div>
     </div>
