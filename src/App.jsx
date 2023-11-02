@@ -1,9 +1,4 @@
-import {
-  BrowserRouter,
-  Navigate,
-  Route,
-  Routes,
-} from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Register from './pages/Register';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -22,7 +17,7 @@ const App = () => {
   };
   return (
     <CurrentPageContexProvider>
-      <div className=" flex h-screen w-screen items-center justify-center">
+      <div className=" flex h-[--webkit-fill-available] w-screen items-center justify-center">
         <BrowserRouter>
           <Routes>
             <Route path="/*">
