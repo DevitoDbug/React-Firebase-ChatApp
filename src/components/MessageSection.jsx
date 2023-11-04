@@ -26,7 +26,7 @@ const MessageSection = () => {
   }, [data.combinedId]);
 
   return (
-    <div className="relative h-[100svh] w-full  p-2 md:w-full">
+    <div className="relative h-full w-full p-2 md:w-full">
       <button
         className="absolute h-9 w-9 rounded-full bg-C_DarkBlue text-lg text-C_TextWhiteDull md:hidden"
         onClick={scrollToContactSection}
@@ -53,7 +53,7 @@ const MessageSection = () => {
             );
           })}
       </div>
-      <div className="fixed bottom-0  m-0 h-[10%] w-full  p-0 sm:h-[15vh] md:h-[7vh] lg:h-[15vh]">
+      <div className="fixed bottom-0 m-0 h-[10%] w-full p-0 sm:h-[15vh] md:h-[7vh] lg:h-[15vh]">
         <InputArea />
       </div>
     </div>

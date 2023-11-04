@@ -24,20 +24,20 @@ const Home = () => {
     <NavContext.Provider
       value={{ scrollToMessageSection, scrollToContactSection }}
     >
-      <div className="mb-1 mt-1 h-full w-screen">
-        <div className="flex-full relative w-screen flex-row  overflow-x-hidden">
+      <div className="mb-1 mt-1 h-[100svh] w-screen ">
+        <div className="flex-full w-50 relative h-[100svh] flex-row overflow-x-hidden">
           <div
             className={`${
-              homePage ? 'md:block' : 'hidden'
-            } h-[100svh] w-full md:block md:w-2/6`}
+              homePage ? ' md:w-2/6' : ' hidden'
+            } h-full w-full  md:w-2/6`}
           >
             <ContactChats />
           </div>
 
           <div
             className={`${
-              homePage ? 'hidden' : 'md:block'
-            } h-[100vh] w-full md:block md:w-4/6 `}
+              homePage ? 'hidden' : 'md:4/6'
+            } h-full w-full  md:w-4/6 `}
           >
             <MessageSection />
           </div>
