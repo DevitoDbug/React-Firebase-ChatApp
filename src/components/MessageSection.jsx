@@ -33,7 +33,7 @@ const MessageSection = () => {
       >
         <FontAwesomeIcon icon={faArrowLeft} />
       </button>
-      <div className="h-[90%] overflow-y-scroll sm:h-[85vh] md:h-[93vh] lg:h-[85vh]">
+      <div className="h-[90%] overflow-y-scroll sm:h-[85vh] md:h-[93vh] lg:h-[90vh]">
         {messages &&
           messages.map((message) => {
             const isSameSender = message.senderId === lastSender;
@@ -53,7 +53,7 @@ const MessageSection = () => {
             );
           })}
       </div>
-      <div className="fixed bottom-0 m-0 h-[10%] w-full p-0 sm:h-[15vh] md:h-[7vh] lg:h-[15vh]">
+      <div className="fixed bottom-0 m-0 h-[10%] w-full  p-0 sm:h-[15vh] md:h-[7vh] md:w-[65%] lg:h-[10vh]">
         <InputArea />
       </div>
     </div>

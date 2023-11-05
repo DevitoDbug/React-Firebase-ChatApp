@@ -25,19 +25,19 @@ const Home = () => {
       value={{ scrollToMessageSection, scrollToContactSection }}
     >
       <div className="mb-1 mt-1 h-[100svh] w-screen ">
-        <div className="flex-full w-50 relative h-[100svh] flex-row overflow-x-hidden">
+        <div className="relative flex h-[100svh] w-full flex-row ">
           <div
             className={`${
-              homePage ? ' md:w-2/6' : ' hidden'
-            } h-full w-full  md:w-2/6`}
+              homePage ? 'block' : ' hidden'
+            } h-full w-full md:block md:w-2/6`}
           >
             <ContactChats />
           </div>
 
           <div
             className={`${
-              homePage ? 'hidden' : 'md:4/6'
-            } h-full w-full  md:w-4/6 `}
+              homePage ? 'hidden' : 'block'
+            } h-full w-full md:block md:w-4/6 `}
           >
             <MessageSection />
           </div>
