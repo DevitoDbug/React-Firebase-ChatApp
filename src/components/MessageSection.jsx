@@ -53,7 +53,7 @@ const MessageSection = () => {
             );
           })}
       </div>
-      <div className="fixed bottom-0 m-0 h-[10%] w-full p-0 sm:h-[15vh] md:h-[7vh] md:w-[full%] lg:h-[10vh]">
+      <div className="sticky bottom-0 m-0 h-[10%] w-full p-0 sm:h-[15vh] md:h-[7vh] md:w-[full%] lg:h-[10vh]">
         <InputArea />
       </div>
     </div>
