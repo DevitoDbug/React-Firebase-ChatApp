@@ -29,7 +29,7 @@ Clone the repository, install dependencies, run the app, and open it in your bro
 
 ```bash
 # Clone the Repository
-git clone https://github.com/yourusername/your-chat-app.git
+git clone https://github.com/DevitoDbug/React-Firebase-ChatApp.git
 
 # Change into the Project Directory
 cd your-chat-app
