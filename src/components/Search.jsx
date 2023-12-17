@@ -74,7 +74,7 @@ const Search = () => {
     handleGetAllContacts();
   }, []);
   return (
-    <div className="absolute left-[10%] top-[10%] flex h-[30%] w-[80%] flex-col items-center rounded-lg bg-[#bae9f8] px-1 py-2 shadow-lg md:left-[30%] md:w-[50%] lg:left-[30%] lg:top-[20%] lg:w-[40%] ">
+    <div className="absolute left-[10%] top-[10%] flex h-[40%] w-[80%] flex-col items-center rounded-lg bg-[#bae9f8] px-1 py-2 shadow-lg md:left-[30%] md:w-[50%] lg:left-[30%] lg:top-[20%] lg:h-[50%] lg:w-[40%] ">
       <button
         onClick={handleCloseSearch}
         className="self-end pr-1 text-[110%] font-bold text-C_GreyBorder"
@@ -102,9 +102,7 @@ const Search = () => {
         </button>
       </div>
       {Object.keys(searchResult).length == 0 ? (
-        <span className="mb-7 mt-7">
-          No matching results from search{':)'}
-        </span>
+        <span className="mb-7 mt-7">No matching results from search{':)'}</span>
       ) : (
         <div className="w-full overflow-y-scroll px-1 py-4">
           <Contact

@@ -20,7 +20,7 @@ const App = () => {
       <div className=" flex h-[100svh] w-screen items-center justify-center">
         <BrowserRouter>
           <Routes>
-            <Route path="/*">npm run 
+            <Route path="/*">
               <Route
                 index
                 element={
